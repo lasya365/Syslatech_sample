@@ -1,0 +1,528 @@
+
+---
+const solutions = [
+  { title: "Web Testing", description: "Quality assurance for web applications", href: "/solutions/web-testing/" },
+  { title: "Mobile Testing", description: "Reliable iOS and Android applications", href: "/solutions/mobile-testing/" },
+  { title: "API Testing", description: "Validate APIs, performance and security", href: "/solutions/api-testing/" },
+  { title: "Automation Testing", description: "Improve speed with test automation", href: "/solutions/automation-testing/" },
+  { title: "Performance Testing", description: "Test speed, stability and scalability", href: "/solutions/performance-testing/" },
+  { title: "AI Testing", description: "Smarter testing for modern applications", href: "/solutions/ai-testing/" },
+];
+
+const navItems = [
+  { title: "Home", href: "/" },
+  { title: "About Us", href: "/about/" },
+  { title: "Services", href: "/services/" },
+  { title: "Contact", href: "/contact/" },
+];
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="/" aria-label="SyslaTech">
+      <span class="brand-mark">Q</span>
+      <span>Quali<span class="brand-accent">Tech</span></span>
+    </a>
+
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="primary-navigation"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="navigation" id="primary-navigation" aria-label="Main navigation">
+      {navItems.slice(0, 2).map((item) => (
+        <a class="nav-link" href={item.href}>{item.title}</a>
+      ))}
+
+      <div class="solutions-item">
+        <button
+          class="nav-link solutions-trigger"
+          type="button"
+          aria-expanded="false"
+          aria-controls="solutions-menu"
+        >
+          Solutions
+          <svg viewBox="0 0 20 20" aria-hidden="true">
+            <path d="m5 7 5 5 5-5" />
+          </svg>
+        </button>
+
+        <div class="mega-menu" id="solutions-menu">
+          <div class="mega-intro">
+            <span class="eyebrow">OUR SOLUTIONS</span>
+            <h2>Quality built into every experience.</h2>
+            <p>Explore testing solutions that help businesses deliver reliable software.</p>
+            <a href="/contact/" class="mega-cta">Discuss your project ↗</a>
+          </div>
+
+          <div class="solutions-grid">
+            {solutions.map((solution) => (
+              <a class="solution-link" href={solution.href}>
+                <span class="solution-icon" aria-hidden="true">↗</span>
+                <span class="solution-copy">
+                  <strong>{solution.title}</strong>
+                  <small>{solution.description}</small>
+                </span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {navItems.slice(2).map((item) => (
+        <a class="nav-link" href={item.href}>{item.title}</a>
+      ))}
+
+      <a class="header-cta" href="/contact/">
+       Contact us <span ></span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  :global(*) {
+    box-sizing: border-box;
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    background: #ffffff;
+    border-bottom: 1px solid #e8edf3;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .header-inner {
+    width: min(1240px, 92%);
+    min-height: 82px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    color: #142b49;
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-decoration: none;
+  }
+
+  .brand-mark {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    background: #087eaa;
+    color: white;
+    font-size: 24px;
+  }
+
+  .brand-accent {
+    color: #0785b5;
+  }
+
+  .navigation {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 0;
+    border: 0;
+    background: transparent;
+    color: #29384d;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link:hover,
+  .nav-link:focus-visible {
+    color: #0785b5;
+  }
+
+  .solutions-item {
+    position: static;
+  }
+
+  .solutions-trigger svg {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    transition: transform 0.2s ease;
+  }
+
+  .solutions-item:hover .solutions-trigger svg,
+  .solutions-item:focus-within .solutions-trigger svg,
+  .solutions-item.is-open .solutions-trigger svg {
+    transform: rotate(180deg);
+  }
+
+  .mega-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 0.8fr 1.7fr;
+    gap: 40px;
+    padding: 36px max(4%, calc((100% - 1180px) / 2));
+    background: #ffffff;
+    border-top: 1px solid #edf1f5;
+    box-shadow: 0 18px 35px rgb(20 43 73 / 12%);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+  }
+
+  .solutions-item:hover .mega-menu,
+  .solutions-item:focus-within .mega-menu,
+  .solutions-item.is-open .mega-menu {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .mega-intro {
+    padding: 12px 28px 12px 0;
+    border-right: 1px solid #e8edf3;
+  }
+
+  .eyebrow {
+    color: #0785b5;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+  }
+
+  .mega-intro h2 {
+    max-width: 280px;
+    margin: 14px 0;
+    color: #142b49;
+    font-size: 29px;
+    line-height: 1.25;
+  }
+
+  .mega-intro p {
+    max-width: 300px;
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .mega-cta {
+    display: inline-block;
+    margin-top: 10px;
+    color: #0785b5;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .solutions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .solution-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 12px;
+    border-radius: 10px;
+    color: inherit;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+
+  .solution-link:hover,
+  .solution-link:focus-visible {
+    background: #f0f8fc;
+  }
+
+  .solution-icon {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+    border-radius: 9px;
+    background: #e7f5fb;
+    color: #0785b5;
+    font-size: 19px;
+  }
+
+  .solution-copy {
+    display: grid;
+    gap: 6px;
+  }
+
+  .solution-copy strong {
+    color: #1b304b;
+    font-size: 14px;
+  }
+
+  .solution-copy small {
+    color: #718096;
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .header-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 13px 18px;
+    border-radius: 7px;
+    background: #087eaa;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.2s ease;
+  }
+
+  .header-cta:hover {
+    background: #075f83;
+  }
+
+  .menu-toggle {
+    display: none;
+    padding: 8px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .menu-toggle span {
+    display: block;
+    width: 25px;
+    height: 2px;
+    margin: 5px 0;
+    border-radius: 2px;
+    background: #142b49;
+  }
+
+  @media (min-width: 901px) {
+    .solutions-item:hover .mega-menu,
+    .solutions-item:focus-within .mega-menu {
+      /* Reveal the mega menu when hovering or tabbing through Solutions. */
+    }
+  }
+
+  @media (max-width: 1100px) {
+    .navigation {
+      gap: 17px;
+    }
+
+    .header-inner {
+      gap: 18px;
+    }
+
+    .brand {
+      font-size: 22px;
+    }
+
+    .header-cta {
+      padding: 12px;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .header-inner {
+      min-height: 72px;
+    }
+
+    .menu-toggle {
+      display: block;
+    }
+
+    .navigation {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      display: none;
+      align-items: stretch;
+      gap: 0;
+      max-height: calc(100vh - 72px);
+      overflow-y: auto;
+      padding: 12px 5% 24px;
+      background: white;
+      border-top: 1px solid #e8edf3;
+      box-shadow: 0 16px 25px rgb(20 43 73 / 10%);
+    }
+
+    .navigation.is-open {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav-link {
+      width: 100%;
+      justify-content: space-between;
+      padding: 15px 0;
+      border-bottom: 1px solid #edf1f5;
+    }
+
+    .solutions-item {
+      position: static;
+    }
+
+    .mega-menu {
+      position: static;
+      display: none;
+      grid-template-columns: 1fr;
+      gap: 15px;
+      padding: 18px 0;
+      border: 0;
+      box-shadow: none;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: none;
+      transition: none;
+    }
+
+    .solutions-item:hover .mega-menu,
+    .solutions-item:focus-within .mega-menu {
+      display: none;
+    }
+
+    .solutions-item.is-open .mega-menu {
+      display: grid;
+    }
+
+    .mega-intro {
+      padding: 0 0 16px;
+      border-right: 0;
+      border-bottom: 1px solid #e8edf3;
+    }
+
+    .mega-intro h2 {
+      max-width: 400px;
+      font-size: 24px;
+    }
+
+    .solutions-grid {
+      grid-template-columns: 1fr;
+      gap: 2px;
+    }
+
+    .solution-link {
+      padding: 12px 8px;
+    }
+
+    .header-cta {
+      align-self: flex-start;
+      margin-top: 18px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+  const header = document.querySelector(".site-header");
+
+  if (header) {
+    const menuToggle = header.querySelector(".menu-toggle");
+    const navigation = header.querySelector(".navigation");
+    const solutionsItem = header.querySelector(".solutions-item");
+    const solutionsTrigger = header.querySelector(".solutions-trigger");
+
+    const closeSolutions = () => {
+      solutionsItem?.classList.remove("is-open");
+      solutionsTrigger?.setAttribute("aria-expanded", "false");
+    };
+
+    const closeNavigation = () => {
+      navigation?.classList.remove("is-open");
+      menuToggle?.setAttribute("aria-expanded", "false");
+      menuToggle?.setAttribute("aria-label", "Open navigation menu");
+      closeSolutions();
+    };
+
+    menuToggle?.addEventListener("click", () => {
+      const isOpen = navigation?.classList.toggle("is-open") ?? false;
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen ? "Close navigation menu" : "Open navigation menu"
+      );
+
+      if (!isOpen) closeSolutions();
+    });
+
+    solutionsTrigger?.addEventListener("click", () => {
+      const isOpen = solutionsItem?.classList.toggle("is-open") ?? false;
+      solutionsTrigger.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeNavigation();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (event.target instanceof Node && !header.contains(event.target)) {
+        closeNavigation();
+      }
+    });
+
+    navigation?.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeNavigation);
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 900) {
+        navigation?.classList.remove("is-open");
+        menuToggle?.setAttribute("aria-expanded", "false");
+        menuToggle?.setAttribute("aria-label", "Open navigation menu");
+        closeSolutions();
+      }
+    });
+  }
+</script>
