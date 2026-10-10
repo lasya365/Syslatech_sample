@@ -1,0 +1,207 @@
+
+<section class="who-section">
+  <div class="who-container">
+    <div class="who-content">
+      <span class="section-label">Who We Are</span>
+
+      <h2>
+        A Team of Elite Software Testing Professionals,
+        <span>Dedicated to Excellence</span>
+      </h2>
+
+      <h3>
+        At Syslatech, quality isn’t just a deliverable—it’s our culture.
+      </h3>
+
+      <p class="intro">
+        We are a team of highly experienced software testing specialists.
+      </p>
+
+      <p class="description">
+        Our mission goes far beyond completing projects; we focus on
+        building long-term value, strengthening brand reputation, and
+        empowering businesses with flawless, future-ready software solutions.
+      </p>
+
+      <a class="who-button" href="/about">
+        Who We Are
+        <span aria-hidden="true">→</span>
+      </a>
+    </div>
+
+    <div class="who-image">
+      <img
+        src="https://syslatech.com/Images/about-us.png"
+        alt="SYSLATECH software testing professionals"
+        loading="lazy"
+      />
+      <span class="image-accent"></span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .who-section {
+    padding: 90px 5%;
+    background: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden;
+  }
+
+  .who-container {
+    width: min(1250px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+    gap: 65px;
+  }
+
+  .who-content {
+    min-width: 0;
+  }
+
+  .section-label {
+    display: inline-block;
+    margin-bottom: 18px;
+    color: #0878d1;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .who-content h2 {
+    margin: 0 0 25px;
+    color: #17365f;
+    font-size: clamp(30px, 3.2vw, 43px);
+    font-weight: 750;
+    line-height: 1.25;
+  }
+
+  .who-content h2 span {
+    color: #0878d1;
+  }
+
+  .who-content h3 {
+    margin: 0 0 16px;
+    color: #263c57;
+    font-size: 21px;
+    line-height: 1.55;
+    font-weight: 700;
+  }
+
+  .who-content p {
+    color: #657286;
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  .intro {
+    margin: 0 0 12px;
+  }
+
+  .description {
+    margin: 0 0 27px;
+  }
+
+  .who-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    padding: 13px 23px;
+    border: 1px solid #0878d1;
+    border-radius: 5px;
+    background: #0878d1;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .who-button:hover {
+    background: #075fa8;
+    transform: translateY(-2px);
+  }
+
+  .who-button span {
+    font-size: 19px;
+  }
+
+  .who-image {
+    position: relative;
+    min-width: 0;
+    padding: 0 0 16px 16px;
+  }
+
+  .who-image img {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 450px;
+    object-fit: contain;
+  }
+
+  .image-accent {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 65%;
+    height: 65%;
+    border-radius: 12px;
+    background: #edf6ff;
+  }
+
+  @media (max-width: 900px) {
+    .who-section {
+      padding: 65px 5%;
+    }
+
+    .who-container {
+      gap: 35px;
+    }
+
+    .who-content h3 {
+      font-size: 18px;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .who-section {
+      padding: 48px 22px;
+    }
+
+    .who-container {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .who-content h2 {
+      font-size: 31px;
+    }
+
+    .who-content h3 {
+      font-size: 18px;
+    }
+
+    .who-content p {
+      font-size: 14px;
+    }
+
+    .who-image {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      padding-left: 8px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .who-button {
+      transition: none;
+    }
+  }
+</style>

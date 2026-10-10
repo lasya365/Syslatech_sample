@@ -1,0 +1,334 @@
+
+---
+const slides = [
+  {
+    title: "AI-POWERED WEB TESTING FOR SUPERIOR QUALITY",
+    description:
+      "BRIDGE THE GAP BETWEEN RAPID DEVELOPMENT AND HIGH-END QUALITY FOR A SEAMLESS USER JOURNEY",
+
+  },
+  {
+    title: "AI-DRIVEN TEST AUTOMATION FOR EVERY DEVICE & PLATFORM",
+    description:
+      "WE STRENGTHEN YOUR APPLICATION CORE WITH INTELLIGENT, SCALABLE TEST AUTOMATION ACROSS WEB, MOBILE, AND APIS—SO YOU SHIP FASTER WITH CONFIDENCE.",
+
+  },
+  {
+    title: "INTELLIGENT TEST AUTOMATION",
+    description:
+      "AI-POWERED AUTOMATION THAT LEARNS APPLICATION BEHAVIOR, ADAPTS TO CHANGES, AND REDUCES FLAKY TESTS—CUTTING MAINTENANCE EFFORT SIGNIFICANTLY.",
+
+  },
+  {
+    title: "PREDICTIVE DEFECT DETECTION",
+    description:
+      "LEVERAGES AI INSIGHTS TO IDENTIFY HIGH-RISK AREAS, PRIORITIZE TEST CASES, AND DETECT POTENTIAL DEFECTS EARLIER IN THE RELEASE CYCLE.",
+
+  },
+  {
+    title: "API & BACKEND AI AUTOMATION",
+    description:
+      "API & BACKEND AI AUTOMATION",
+  },
+];
+---
+
+<section class="hero-carousel" aria-label="Featured solutions">
+  <button class="arrow previous" aria-label="Previous slide">
+    &#10094;
+  </button>
+
+  <div class="carousel-panel">
+    {slides.map((slide, index) => (
+      <article class:list={["slide", { active: index === 0 }]}>
+        <div class="slide-content">
+          <img
+            class="slide-logo"
+            src="https://syslatech.com/Images/Logo.png"
+            alt="SYSLATECH"
+          />
+
+          <h1>{slide.title}</h1>
+          <p>{slide.description}</p>
+        </div>
+
+        <div class="slide-visual">
+          <img src={slide.image} alt="" />
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <button class="arrow next" aria-label="Next slide">
+    &#10095;
+  </button>
+
+  <div class="dots" aria-label="Choose slide">
+    {slides.map((slide, index) => (
+      <button
+        class:list={["dot", { active: index === 0 }]}
+        aria-label={`Go to slide ${index + 1}`}
+        aria-current={index === 0 ? "true" : undefined}
+      ></button>
+    ))}
+  </div>
+</section>
+
+<style>
+  .hero-carousel {
+    position: relative;
+    padding: 65px 5.8% 48px;
+    background: linear-gradient(110deg, #d4edff, #f5fbff);
+    overflow: hidden;
+  }
+
+  .carousel-panel {
+    position: relative;
+    min-height: 540px;
+    border: 1px solid rgba(255, 255, 255, 0.95);
+    border-radius: 64px 64px 0 0;
+    overflow: hidden;
+  }
+
+  .slide {
+    display: none;
+    min-height: 540px;
+    grid-template-columns: 1.15fr 0.85fr;
+    align-items: center;
+    gap: 30px;
+    padding: 55px 4%;
+  }
+
+  .slide.active {
+    display: grid;
+    animation: fade-in 0.65s ease;
+  }
+
+  .slide-content {
+    max-width: 760px;
+  }
+
+  .slide-logo {
+    display: block;
+    width: 260px;
+    max-width: 75%;
+    height: auto;
+    object-fit: contain;
+    margin-bottom: 26px;
+  }
+
+  .slide h1 {
+    margin: 0 0 24px;
+    color: #050505;
+    font-size: clamp(28px, 2.5vw, 46px);
+    line-height: 1.2;
+    font-weight: 750;
+  }
+
+  .slide p {
+    margin: 0;
+    color: #8497a3;
+    font-size: clamp(15px, 1.15vw, 21px);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .slide-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .slide-visual img {
+    width: 100%;
+    max-width: 540px;
+    max-height: 390px;
+    object-fit: contain;
+  }
+
+  .arrow {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 0;
+    padding: 12px;
+    color: #0799f5;
+    background: transparent;
+    font-size: 30px;
+    cursor: pointer;
+  }
+
+  .arrow:hover {
+    color: #006bb5;
+  }
+
+  .previous {
+    left: 1.8%;
+  }
+
+  .next {
+    right: 1.8%;
+  }
+
+  .dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 3;
+  }
+
+  .dot {
+    width: 9px;
+    height: 9px;
+    border: 0;
+    border-radius: 50%;
+    background: #9bb9ca;
+    cursor: pointer;
+  }
+
+  .dot.active {
+    background: #0799f5;
+    transform: scale(1.25);
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateX(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @media (max-width: 760px) {
+    .hero-carousel {
+      padding: 25px 5% 55px;
+    }
+
+    .carousel-panel {
+      border-radius: 32px 32px 0 0;
+    }
+
+    .slide,
+    .slide.active {
+      min-height: auto;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 40px 8% 35px;
+    }
+
+    .slide-logo {
+      width: 190px;
+      margin-bottom: 20px;
+    }
+
+    .slide h1 {
+      font-size: 27px;
+    }
+
+    .slide p {
+      font-size: 14px;
+    }
+
+    .slide-visual img {
+      max-height: 240px;
+    }
+
+    .arrow {
+      font-size: 23px;
+      padding: 5px;
+    }
+
+    .previous {
+      left: 0;
+    }
+
+    .next {
+      right: 0;
+    }
+
+    .dots {
+      bottom: 16px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slide.active {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  const carousel = document.querySelector(".hero-carousel");
+
+  if (carousel && !carousel.hasAttribute("data-initialized")) {
+    carousel.setAttribute("data-initialized", "true");
+
+    const slides = Array.from(carousel.querySelectorAll(".slide"));
+    const dots = Array.from(carousel.querySelectorAll(".dot"));
+    const previous = carousel.querySelector(".previous");
+    const next = carousel.querySelector(".next");
+
+    let current = 0;
+    let timer;
+
+    function showSlide(index) {
+      current = (index + slides.length) % slides.length;
+
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === current);
+      });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("active", i === current);
+
+        if (i === current) {
+          dot.setAttribute("aria-current", "true");
+        } else {
+          dot.removeAttribute("aria-current");
+        }
+      });
+    }
+
+    function startTimer() {
+      window.clearInterval(timer);
+      timer = window.setInterval(() => {
+        showSlide(current + 1);
+      }, 5000);
+    }
+
+    previous?.addEventListener("click", () => {
+      showSlide(current - 1);
+      startTimer();
+    });
+
+    next?.addEventListener("click", () => {
+      showSlide(current + 1);
+      startTimer();
+    });
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        showSlide(index);
+        startTimer();
+      });
+    });
+
+    carousel.addEventListener("mouseenter", () => {
+      window.clearInterval(timer);
+    });
+
+    carousel.addEventListener("mouseleave", startTimer);
+
+    showSlide(0);
+    startTimer();
+  }
+</script>

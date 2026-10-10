@@ -1,20 +1,18 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
+import HeroCarousel from "../components/HeroCarousel.astro";
+import WhoWeAre from "../components/WhoWeAre.astro";
+import FAQ from "../components/FAQ.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <Layout>
   <Header />
-
+  <HeroCarousel />
+  <WhoWeAre />
+  <FAQ />
+  <Footer />
   <main>
-    <section style="padding: 100px 5%; text-align: center;">
-      <h1>Quality Engineering for a Smarter Digital Future</h1>
-
-      <p>
-        Deliver reliable software experiences with modern testing solutions.
-      </p>
-
-      <a href="/contact/">Contact us</a>
-    </section>
   </main>
 </Layout>

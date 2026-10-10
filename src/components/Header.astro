@@ -185,9 +185,13 @@ const menus = [
 
 <header class="site-header">
   <div class="header-inner">
-    <a class="brand" href="" aria-label="SYSLATECH home">
-      <span class="brand-main">SYSLATECH</span>
-      <span class="brand-line"></span>
+    <a class="brand" href="/" aria-label="SYSLATECH home">
+      <img
+        class="slide-logo"
+        src="https://syslatech.com/Images/Logo.png"
+        alt="SYSLATECH"
+        />
+        <span class="brand-line"></span>
     </a>
 
     <button
@@ -285,26 +289,34 @@ const menus = [
     gap: 34px;
   }
 
+  
   .brand {
-    position: relative;
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
     flex-shrink: 0;
-    color: #123d78;
+    width: 190px;
     text-decoration: none;
-    font-size: 25px;
-    font-weight: 800;
-    letter-spacing: 1.4px;
+  }
+
+  .slide-logo {
+    display: block;
+    width: 180px;
+    max-width: 100%;
+    height: 43px;
+    object-fit: contain;
+    object-position: left center;
   }
 
   .brand-line {
     width: 58%;
     height: 3px;
-    margin-top: 5px;
+    margin-top: 4px;
     border-radius: 5px;
     background: #1684e8;
   }
+
 
   .main-nav {
     display: flex;

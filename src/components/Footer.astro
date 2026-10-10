@@ -1,0 +1,380 @@
+<footer class="site-footer">
+  <div class="footer-container">
+    <!-- Company logo -->
+    <div class="footer-brand">
+      <a href="/" aria-label="SYSLATECH home">
+        <img
+          src="https://syslatech.com/Images/Logo.png"
+          alt="SYSLATECH"
+        />
+      </a>
+    </div>
+
+    <!-- Quick links -->
+    <div class="footer-column">
+      <h3>Quick Links</h3>
+      <ul class="quick-links">
+        <li><a href="/"><span>›</span> Home</a></li>
+        <li><a href="/services"><span>›</span> Services</a></li>
+        <li><a href="/about"><span>›</span> About Us</a></li>
+        <li><a href="/contact"><span>›</span> Contact Us</a></li>
+      </ul>
+    </div>
+
+    <!-- Contact information -->
+    <div class="footer-column contact-column">
+      <h3>Contact Information</h3>
+
+      <a
+        class="contact-item"
+        href="https://maps.google.com/?q=Bangalore+Karnataka+India"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          src="https://syslatech.com/Icons/location-white.svg"
+          alt=""
+        />
+        <span>Bangalore, Karnataka, India</span>
+      </a>
+
+      <a
+        class="contact-item"
+        href="mailto:chandu@syslatech.com"
+      >
+        <img
+          src="https://syslatech.com/Icons/email-white.svg"
+          alt=""
+        />
+        <span>chandu@syslatech.com</span>
+      </a>
+
+      <a class="contact-item" href="tel:+919986055536">
+        <img
+          src="https://syslatech.com/Icons/phone-white.svg"
+          alt=""
+        />
+        <span>+91 9986055536</span>
+      </a>
+    </div>
+
+    <!-- Compact contact form -->
+    <div class="contact-form-section">
+      <h3>Contact Us</h3>
+
+      <form
+        class="contact-form"
+        action="mailto:chandu@syslatech.com"
+        method="post"
+        enctype="text/plain"
+      >
+        <input
+          type="text"
+          name="Full Name"
+          placeholder="Full Name"
+          aria-label="Full Name"
+          autocomplete="name"
+          required
+        />
+
+        <div class="phone-row">
+          <select
+            name="Country Code"
+            aria-label="Country Code"
+            required
+          >
+            <option value="+91" selected>+91 IN</option>
+            <option value="+1">+1 US</option>
+            <option value="+44">+44 UK</option>
+            <option value="+971">+971 UAE</option>
+            <option value="+966">+966 SA</option>
+            <option value="+974">+974 QA</option>
+            <option value="+965">+965 KW</option>
+            <option value="+968">+968 OM</option>
+            <option value="+880">+880 BD</option>
+            <option value="+92">+92 PK</option>
+            <option value="+94">+94 LK</option>
+            <option value="+65">+65 SG</option>
+            <option value="+60">+60 MY</option>
+            <option value="+61">+61 AU</option>
+            <option value="+49">+49 DE</option>
+          </select>
+
+          <input
+            type="tel"
+            name="Phone Number"
+            placeholder="Phone Number"
+            aria-label="Phone Number"
+            autocomplete="tel-national"
+            required
+          />
+        </div>
+
+        <input
+          type="email"
+          name="Email"
+          placeholder="Email Address"
+          aria-label="Email Address"
+          autocomplete="email"
+          required
+        />
+
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Copyright -->
+  <div class="footer-bottom">
+    <p>
+      © {new Date().getFullYear()} SYSLATECH. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: #102b4e;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  /* Four columns in one row */
+  .footer-container {
+    width: min(1250px, 92%);
+    margin: 0 auto;
+    padding: 42px 0 35px;
+    display: grid;
+    grid-template-columns: 1fr 0.8fr 1.2fr 1.2fr;
+    gap: 28px;
+    align-items: start;
+  }
+
+  .footer-brand,
+  .footer-column,
+  .contact-form-section {
+    min-width: 0;
+  }
+
+  /* Logo */
+  .footer-brand img {
+    display: block;
+    width: 175px;
+    max-width: 100%;
+    height: 48px;
+    object-fit: contain;
+    object-position: left center;
+  }
+
+  /* Headings */
+  .footer-column h3,
+  .contact-form-section h3 {
+    margin: 0 0 18px;
+    color: #ffffff;
+    font-size: 17px;
+    line-height: 1.4;
+    font-weight: 700;
+  }
+
+  /* Quick links */
+  .quick-links {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .quick-links a {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    color: #d5e0ef;
+    font-size: 13px;
+    line-height: 1.7;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .quick-links a span {
+    color: #43a6ff;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .quick-links a:hover,
+  .contact-item:hover {
+    color: #62b6ff;
+  }
+
+  /* Contact information */
+  .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin-bottom: 13px;
+    color: #d5e0ef;
+    font-size: 13px;
+    line-height: 1.7;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    transition: color 0.2s ease;
+  }
+
+  .contact-item img {
+    width: 17px;
+    height: 17px;
+    margin-top: 3px;
+    flex-shrink: 0;
+    object-fit: contain;
+  }
+
+  /* Compact Contact Us form */
+  .contact-form-section {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    text-align: left;
+  }
+
+  .contact-form-section h3 {
+    margin-bottom: 18px;
+    text-transform: uppercase;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    width: 100%;
+    max-width: 340px;
+    margin: 0;
+  }
+
+  .contact-form input,
+  .contact-form select {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 39px;
+    box-sizing: border-box;
+    padding: 9px 10px;
+    border: 1px solid #38516f;
+    border-radius: 4px;
+    outline: none;
+    background: #ffffff;
+    color: #20334b;
+    font-family: inherit;
+    font-size: 13px;
+  }
+
+  .contact-form input:focus,
+  .contact-form select:focus {
+    border-color: #4ca8ff;
+    box-shadow: 0 0 0 2px rgb(76 168 255 / 15%);
+  }
+
+  /* Country code and phone number share one row */
+  .phone-row {
+    display: flex;
+    align-items: stretch;
+    gap: 7px;
+    width: 100%;
+  }
+
+  .phone-row select {
+    flex: 0 0 100px;
+    width: 100px;
+  }
+
+  .phone-row input {
+    flex: 1 1 0;
+    width: 0;
+    min-width: 0;
+  }
+
+  /* Submit button */
+  .contact-form button {
+    align-self: flex-start;
+    min-height: 37px;
+    margin-top: 3px;
+    padding: 9px 19px;
+    border: 0;
+    border-radius: 4px;
+    background: #1684e8;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .contact-form button:hover {
+    background: #0866ba;
+  }
+
+  /* Copyright */
+  .footer-bottom {
+    padding: 16px 20px;
+    border-top: 1px solid #29415f;
+    text-align: center;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    color: #c5d2e3;
+    font-size: 12px;
+    line-height: 1.7;
+  }
+
+  /* Tablet: two columns */
+  @media (max-width: 1050px) {
+    .footer-container {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 35px 28px;
+      padding: 38px 0;
+    }
+
+    .footer-form-section {
+      max-width: 100%;
+    }
+
+    .contact-form {
+      max-width: 360px;
+    }
+  }
+
+  /* Mobile: stack columns */
+  @media (max-width: 560px) {
+    .footer-container {
+      width: 88%;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 28px;
+      padding: 35px 0;
+    }
+
+    .footer-brand img {
+      width: 165px;
+    }
+
+    .footer-column h3,
+    .contact-form-section h3 {
+      margin-bottom: 14px;
+      font-size: 17px;
+    }
+
+    .contact-form {
+      max-width: 100%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .quick-links a,
+    .contact-item,
+    .contact-form button {
+      transition: none;
+    }
+  }
+</style>

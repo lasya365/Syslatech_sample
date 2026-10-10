@@ -1,0 +1,233 @@
+
+
+---
+const faqs = [
+  {
+    question: "Do you provide manual and automation testing?",
+    answer: "Yes. We combine both to ensure full coverage.",
+  },
+  {
+    question: "Can you integrate with CI/CD pipelines?",
+    answer: "Yes. Our testing fits seamlessly into modern DevOps workflows.",
+  },
+  {
+    question: "How quickly can testing start?",
+    answer: "Engagements can begin after a short onboarding and requirement review.",
+  },
+  {
+    question: "Do you customize testing based on project needs?",
+    answer: "Always. No one-size-fits-all testing here.",
+  },
+];
+---
+
+<section class="faq-section" id="faq">
+  <div class="faq-container">
+    <div class="faq-intro">
+      <span class="eyebrow">FAQ</span>
+      <h2>Frequently Asked Questions</h2>
+      <p>
+        Find answers to common questions about software testing,
+        test automation, and our solutions.
+      </p>
+
+    </div>
+
+    <div class="faq-list">
+      {faqs.map((faq, index) => (
+        <details class="faq-item" open={index === 0}>
+          <summary>
+            <span>{faq.question}</span>
+            <span class="faq-arrow" aria-hidden="true"></span>
+          </summary>
+
+          <div class="faq-answer">
+            <p>{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    padding: 90px 6%;
+    background: linear-gradient(120deg, #f4faff, #eaf5ff);
+    color: #102343;
+  }
+
+  .faq-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    align-items: center;
+    gap: 70px;
+  }
+
+  .faq-intro {
+    min-width: 0;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: #078cf0;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+  }
+
+  .faq-intro h2 {
+    max-width: 480px;
+    margin: 0 0 20px;
+    font-size: clamp(32px, 3.2vw, 46px);
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  .faq-intro > p {
+    max-width: 460px;
+    margin: 0;
+    color: #627996;
+    font-size: 17px;
+    line-height: 1.8;
+  }
+
+  .faq-illustration {
+    margin-top: 28px;
+    width: 100%;
+    max-width: 440px;
+  }
+
+  .faq-illustration img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+  }
+
+  .faq-item {
+    border: 1px solid #d7e7fa;
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.88);
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .faq-item[open] {
+    border-color: #b7d9ff;
+    box-shadow: 0 6px 20px rgba(31, 106, 180, 0.06);
+  }
+
+  .faq-item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 25px 28px;
+    min-height: 88px;
+    cursor: pointer;
+    list-style: none;
+    color: #102343;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+
+  .faq-item summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-arrow {
+    flex-shrink: 0;
+    width: 11px;
+    height: 11px;
+    border-right: 2px solid #7e94ad;
+    border-bottom: 2px solid #7e94ad;
+    transform: rotate(45deg) translateY(-3px);
+    transition: transform 0.25s ease;
+  }
+
+  .faq-item[open] .faq-arrow {
+    transform: rotate(225deg) translate(-2px, -2px);
+    border-color: #078cf0;
+  }
+
+  .faq-answer {
+    padding: 0 28px 25px;
+  }
+
+  .faq-answer p {
+    margin: 0;
+    color: #627996;
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 900px) {
+    .faq-section {
+      padding: 70px 5%;
+    }
+
+    .faq-container {
+      grid-template-columns: 1fr;
+      gap: 35px;
+    }
+
+    .faq-intro {
+      text-align: center;
+    }
+
+    .faq-intro h2,
+    .faq-intro > p {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .faq-illustration {
+      max-width: 300px;
+      margin: 25px auto 0;
+    }
+
+    .faq-list {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .faq-section {
+      padding: 50px 5%;
+    }
+
+    .faq-intro h2 {
+      font-size: 32px;
+    }
+
+    .faq-intro > p {
+      font-size: 15px;
+    }
+
+    .faq-item summary {
+      padding: 20px;
+      min-height: 75px;
+      font-size: 16px;
+    }
+
+    .faq-answer {
+      padding: 0 20px 20px;
+    }
+
+    .faq-answer p {
+      font-size: 15px;
+    }
+  }
+</style>
