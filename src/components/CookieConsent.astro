@@ -1,0 +1,60 @@
+---
+---
+<style is:global>
+  @import "../styles/cookieConsent.css";
+</style>
+
+<div
+  class="cookie-banner"
+  id="cookie-banner"
+  role="dialog"
+  aria-label="Cookie consent"
+  aria-describedby="cookie-description"
+  hidden
+>
+  <div class="cookie-content">
+    <div class="cookie-icon" aria-hidden="true">🍪</div>
+
+    <div class="cookie-text">
+      <h2>We value your privacy</h2>
+
+      <p id="cookie-description">
+        We use cookies to improve your browsing experience,
+        understand how our website is used, and improve our services.
+        You can accept or reject optional cookies.
+      </p>
+
+      <a href="/about">Learn more</a>
+    </div>
+  </div>
+
+  <div class="cookie-actions">
+    <button
+      class="cookie-button reject-button"
+      id="reject-cookies"
+      type="button"
+    >
+      Reject optional
+    </button>
+
+    <button
+      class="cookie-button accept-button"
+      id="accept-cookies"
+      type="button"
+    >
+      Accept all cookies
+    </button>
+  </div>
+</div>
+
+<button
+  type="button"
+  id="cookie-settings"
+  class="cookie-settings"
+>
+  Cookie Settings
+</button>
+
+<script>
+  import "../scripts/cookieConsent";
+</script>

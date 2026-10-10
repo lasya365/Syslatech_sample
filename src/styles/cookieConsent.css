@@ -1,0 +1,139 @@
+.cookie-banner {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(900px, calc(100% - 32px));
+  box-sizing: border-box;
+  padding: 24px;
+  background: #fff;
+  color: #1e293b;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgb(15 23 42 / 18%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+}
+
+.cookie-banner[hidden] {
+  display: none;
+}
+
+.cookie-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  flex: 1;
+}
+
+.cookie-icon {
+  font-size: 32px;
+}
+
+.cookie-text h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+}
+
+.cookie-text p {
+  margin: 0 0 8px;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.cookie-text a {
+  color: #2563eb;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.cookie-text a:hover {
+  text-decoration: underline;
+}
+
+.cookie-actions {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cookie-button {
+  padding: 12px 18px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.reject-button {
+  background: #fff;
+  color: #334155;
+}
+
+.reject-button:hover {
+  background: #f1f5f9;
+}
+
+.accept-button {
+  background: #2563eb;
+  color: #fff;
+  border-color: #2563eb;
+}
+
+.accept-button:hover {
+  background: #1d4ed8;
+}
+
+.cookie-button:focus-visible,
+.cookie-text a:focus-visible {
+  outline: 3px solid #93c5fd;
+  outline-offset: 3px;
+}
+
+@media (max-width: 650px) {
+  .cookie-banner {
+    bottom: 12px;
+    padding: 20px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+  }
+
+  .cookie-actions {
+    flex-direction: column-reverse;
+  }
+
+  .cookie-button {
+    width: 100%;
+  }
+
+  .cookie-text h2 {
+    font-size: 18px;
+  }
+}
+
+.cookie-settings {
+  position: fixed;
+  bottom: 16px;
+  left: 16px;
+  z-index: 999;
+  padding: 10px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: white;
+  color: #0f172a;
+  cursor: pointer;
+}
+
+.cookie-settings:hover {
+  background: #f1f5f9;
+}
