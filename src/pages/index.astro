@@ -1,15 +1,20 @@
 ---
+import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 ---
 
-<Header />
+<Layout>
+  <Header />
 
-<main>
-  <section style="padding: 100px 5%; text-align: center;">
-    <h1>Quality Engineering for a Smarter Digital Future</h1>
-    <p>
-      Deliver reliable software experiences with modern testing solutions.
-    </p>
-    <a href="/contact/">Contact us</a>
-  </section>
-</main>
+  <main>
+    <section style="padding: 100px 5%; text-align: center;">
+      <h1>Quality Engineering for a Smarter Digital Future</h1>
+
+      <p>
+        Deliver reliable software experiences with modern testing solutions.
+      </p>
+
+      <a href="/contact/">Contact us</a>
+    </section>
+  </main>
+</Layout>
