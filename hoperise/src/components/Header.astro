@@ -1,0 +1,65 @@
+
+---
+import "../styles/header.css";
+
+const navItems = [
+  { label: "WHO WE ARE", href: "/who-we-are" },
+  { label: "WHAT WE DO", href: "/what-we-do" },
+  { label: "NEWS & EVENTS", href: "/news-events" },
+  { label: "GET INVOLVED", href: "/get-involved" },
+];
+---
+
+<header class="header">
+  <a href="/" class="logo" aria-label="Hope Rise home">
+    <span class="logo-icon">
+      <svg viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <circle cx="20" cy="20" r="7" stroke="currentColor" stroke-width="1.5"/>
+        <circle cx="20" cy="7" r="3" stroke="currentColor"/>
+        <circle cx="9" cy="13" r="3" stroke="currentColor"/>
+        <circle cx="31" cy="13" r="3" stroke="currentColor"/>
+        <circle cx="9" cy="27" r="3" stroke="currentColor"/>
+        <circle cx="31" cy="27" r="3" stroke="currentColor"/>
+        <circle cx="20" cy="33" r="3" stroke="currentColor"/>
+      </svg>
+    </span>
+    <span class="logo-text">HOPE RISE</span>
+  </a>
+
+  <nav class="navigation" id="main-nav" aria-label="Main navigation">
+    {navItems.map((item) => (
+      <a href={item.href} class="nav-link">{item.label}</a>
+    ))}
+  </nav>
+
+  <div class="header-actions">
+    <a href="tel:+10000000000" class="phone-button" aria-label="Call us">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path
+          d="M7 3H4a1 1 0 0 0-1 1c0 9.4 7.6 17 17 17a1 1 0 0 0 1-1v-3l-5-2-2 3a15 15 0 0 1-5-5l3-2-2-5H7Z"
+          stroke="currentColor"
+          stroke-width="1.4"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </a>
+
+    <a href="/donate" class="donate-button">DONATE</a>
+
+    <button
+      type="button"
+      class="menu-toggle"
+      aria-label="Toggle navigation"
+      aria-expanded="false"
+      aria-controls="main-nav"
+      onclick="toggleMenu()"
+    >
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+<script>
+  import "../scripts/header.js";
+</script>

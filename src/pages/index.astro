@@ -1,15 +1,31 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Hero from "../components/Hero.astro";
-import WhatWeDo from "../components/WhatWeDo.astro";
-import OurImpact from "../components/OurImpact.astro";
+import Header from "../components/Header.astro";
+import HeroCarousel from "../components/HeroCarousel.astro";
+import WhoWeAre from "../components/WhoWeAre.astro";
+import FAQ from "../components/FAQ.astro";
+import Footer from "../components/Footer.astro";
+import Solutions from "../components/Solutions.astro";
 ---
 
 <Layout>
+  <Header />
+  <HeroCarousel />
+  <WhoWeAre />
+  <Solutions />
+  <FAQ />
+  <Footer />
+
   <main>
-    <Hero />
-    <WhatWeDo />
-	<OurImpact />
+    <section style="padding: 100px 5%; text-align: center;">
+      <div role="heading" aria-level="1">
+        Quality Engineering for a Smarter Digital Future
+      </div>
+      <p>
+        Deliver reliable software experiences with modern testing solutions.
+      </p>
+      <a href="/contact/">Contact us</a>
+    </section>
+
   </main>
 </Layout>
-

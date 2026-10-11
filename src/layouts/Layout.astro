@@ -1,22 +1,18 @@
-
 ---
-import Header from "../components/Header.astro";
-import "../styles/global.css";
+import CookieConsent from "../components/CookieConsent.astro";
 ---
 
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Hope Rise — bringing hope, care, and support to communities."
-    />
-    <title>Hope Rise — Hope is Support</title>
+    <title>Syslatech | Software Solutions</title>
   </head>
 
   <body>
-    <Header />
     <slot />
+
+    <CookieConsent />
   </body>
 </html>
