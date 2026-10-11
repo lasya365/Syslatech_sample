@@ -1,0 +1,322 @@
+
+---
+const impacts = [
+  {
+    value: 31541,
+    prefix: "",
+    description: "People Received Help",
+    background: "#FFFFFF",
+  },
+  {
+    value: 216,
+    prefix: "",
+    description: "Events Organized",
+    background: "#f4dfb3",
+  },
+  {
+    value: 36546840,
+    prefix: "$",
+    description: "Raised in Donations",
+    background: "#FFFFFF",
+  },
+];
+---
+
+<section class="impact-page" aria-label="Our Impact">
+  <header class="impact-heading">
+    <p class="eyebrow">OUR IMPACT</p>
+    <h1>Together, We're Making a Difference</h1>
+  </header>
+
+  <div class="impact-statistic visible" aria-live="off">
+    <h2 class="stat-number">
+      <span class="number-prefix"></span>
+      <span class="number-value">31,541</span>
+    </h2>
+    <p class="stat-description">People Received Help</p>
+  </div>
+
+  <div class="impact-progress" aria-hidden="true">
+    <span class="progress-fill"></span>
+  </div>
+</section>
+
+<script>
+  const page = document.querySelector(".impact-page");
+  const statistic = page?.querySelector(".impact-statistic");
+  const number = page?.querySelector(".number-value");
+  const prefix = page?.querySelector(".number-prefix");
+  const description = page?.querySelector(".stat-description");
+  const progress = page?.querySelector(".progress-fill");
+
+  const impacts = [
+    {
+      value: 31541,
+      prefix: "",
+      description: "People Received Help",
+      background: "#FFFFFF",
+    },
+    {
+      value: 216,
+      prefix: "",
+      description: "Events Organized",
+      background: "#F5F0E5",
+    },
+    {
+      value: 36546840,
+      prefix: "$",
+      description: "Raised in Donations",
+      background: "#FFFFFF",
+    },
+  ];
+
+  const DISPLAY_TIME = 4000;
+  const COUNT_DURATION = 1800;
+
+  let currentIndex = 0;
+  let intervalId;
+  let animationFrame;
+  let transitionTimeout;
+  let countStartTime;
+  let countStartValue = 0;
+  let countTarget = 0;
+
+  const reducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  function animateCount(target, currencyPrefix) {
+    cancelAnimationFrame(animationFrame);
+
+    if (!number || !prefix) return;
+
+    prefix.textContent = currencyPrefix;
+    countStartTime = null;
+    countStartValue = 0;
+    countTarget = target;
+
+    function updateCount(timestamp) {
+      if (countStartTime === null) {
+        countStartTime = timestamp;
+      }
+
+      const elapsed = timestamp - countStartTime;
+      const progressValue = Math.min(elapsed / COUNT_DURATION, 1);
+      const eased = 1 - Math.pow(1 - progressValue, 4);
+
+      const value = Math.round(
+        countStartValue + (countTarget - countStartValue) * eased
+      );
+
+      number.textContent = value.toLocaleString("en-US");
+
+      if (progressValue < 1) {
+        animationFrame = requestAnimationFrame(updateCount);
+      } else {
+        number.textContent = countTarget.toLocaleString("en-US");
+      }
+    }
+
+    animationFrame = requestAnimationFrame(updateCount);
+  }
+
+  function showImpact(index) {
+    if (!page || !statistic || !description || !progress) return;
+
+    const impact = impacts[index];
+
+    statistic.classList.remove("visible");
+
+    window.clearTimeout(transitionTimeout);
+
+    transitionTimeout = window.setTimeout(
+      () => {
+        page.style.backgroundColor = impact.background;
+        description.textContent = impact.description;
+
+        animateCount(impact.value, impact.prefix);
+
+        statistic.classList.add("visible");
+      },
+      reducedMotion ? 0 : 450
+    );
+
+    progress.style.animation = "none";
+    void progress.offsetWidth;
+
+    if (!reducedMotion) {
+      progress.style.animation =
+        `fill-progress ${DISPLAY_TIME}ms linear forwards`;
+    }
+  }
+
+  function nextImpact() {
+    currentIndex = (currentIndex + 1) % impacts.length;
+    showImpact(currentIndex);
+  }
+
+  function startAnimation() {
+    if (intervalId) return;
+
+    showImpact(currentIndex);
+    intervalId = window.setInterval(nextImpact, DISPLAY_TIME);
+  }
+
+  function stopAnimation() {
+    window.clearInterval(intervalId);
+    window.clearTimeout(transitionTimeout);
+    cancelAnimationFrame(animationFrame);
+    intervalId = undefined;
+  }
+
+  startAnimation();
+
+  document.addEventListener("astro:before-swap", stopAnimation, {
+    once: true,
+  });
+</script>
+
+<style>
+  .impact-page {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    isolation: isolate;
+    width: 100%;
+    min-height: 100svh;
+    overflow: hidden;
+    background-color: #ffffff;
+    color: #293d2d;
+    transition: background-color 1.5s ease-in-out;
+  }
+
+  .impact-heading {
+    position: absolute;
+    top: 12%;
+    left: 20px;
+    right: 20px;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .eyebrow {
+    margin: 0 0 18px;
+    color: #718365;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 5px;
+  }
+
+  .impact-heading h1 {
+    max-width: 950px;
+    margin: 0 auto;
+    color: #293d2d;
+    font-size: clamp(30px, 4.5vw, 58px);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -1.5px;
+  }
+
+  .impact-statistic {
+    width: 100%;
+    padding: 40px 20px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 650ms ease,
+      transform 800ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .impact-statistic.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .stat-number {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 5px;
+    margin: 0;
+    color: #344e3b;
+    font-size: clamp(54px, 10vw, 120px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -4px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .number-prefix {
+    font-size: 0.8em;
+  }
+
+  .stat-description {
+    margin: 24px 0 0;
+    color: #65745f;
+    font-size: clamp(17px, 2vw, 25px);
+    font-weight: 400;
+    letter-spacing: 0.3px;
+  }
+
+  .impact-progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(90, 105, 80, 0.12);
+  }
+
+  .progress-fill {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: #788b6c;
+  }
+
+  @keyframes fill-progress {
+    from {
+      width: 0;
+    }
+
+    to {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .impact-heading {
+      top: 20%;
+      left: 18px;
+      right: 18px;
+    }
+
+    .eyebrow {
+      margin-bottom: 15px;
+      letter-spacing: 4px;
+    }
+
+    .impact-heading h1 {
+      font-size: clamp(29px, 8vw, 42px);
+      letter-spacing: -0.8px;
+    }
+
+    .stat-number {
+      font-size: clamp(44px, 11vw, 72px);
+      letter-spacing: -2px;
+    }
+
+    .stat-description {
+      margin-top: 18px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .impact-page,
+    .impact-statistic {
+      transition: none;
+    }
+  }
+</style>

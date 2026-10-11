@@ -1,0 +1,97 @@
+
+---
+import "../styles/what-we-do.css";
+
+const services = [
+  {
+    number: "01",
+    icon: "◎",
+    title: "Make a Donation",
+    description:
+      "Contribute today to help fund treatments, research, and essential support services for those battling cancer.",
+    footer: "Payment Options",
+    image: "💚",
+    href: "/donate",
+  },
+  {
+    number: "02",
+    icon: "♟",
+    title: "Get Support",
+    description:
+      "Access vital resources, financial aid, and counseling for patients and their families in their time of need.",
+    footer: "Financial Aid · Therapy",
+    image: "",
+    href: "/get-involved",
+  },
+  {
+    number: "03",
+    icon: "♧",
+    title: "Become a Volunteer",
+    description:
+      "Join our team of volunteers to support cancer patients, assist with community outreach, and make a positive impact.",
+    footer: "Join Our Team",
+    image: "",
+    href: "/get-involved",
+  },
+];
+---
+
+<section class="what-we-do-section">
+  <div class="what-we-do-heading">
+    <span class="section-label">What We Do</span>
+
+    <h2>
+      Providing Hope And Help<br />
+      During Challenging Times
+    </h2>
+
+    <a href="/get-involved" class="learn-more">
+      <span>LEARN MORE</span>
+      <span class="learn-more-arrow" aria-hidden="true">↗</span>
+    </a>
+  </div>
+
+  <div class="service-cards">
+    {services.map((service) => (
+      <article class="service-card">
+        <div class="service-icon" aria-hidden="true">
+          {service.icon}
+        </div>
+
+        <h3>{service.title}</h3>
+
+        <p class="service-description">{service.description}</p>
+
+        <div class="service-card-footer">
+          {service.number === "01" ? (
+            <div class="payment-icons" aria-label="Payment options">
+              <span>●</span>
+              <span>G</span>
+              <span>●</span>
+            </div>
+          ) : service.number === "03" ? (
+            <div class="volunteer-avatars" aria-label="Our volunteers">
+              <span>L</span>
+              <span>V</span>
+              <span>H</span>
+            </div>
+          ) : (
+            <span class="service-footer-text">{service.footer}</span>
+          )}
+
+          {service.number === "01" && (
+            <span class="service-footer-text">{service.footer}</span>
+          )}
+
+          <a
+            href={service.href}
+            class="service-arrow"
+            aria-label={`Learn more about ${service.title}`}
+          >
+            ↗
+          </a>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

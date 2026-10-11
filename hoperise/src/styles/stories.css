@@ -1,0 +1,446 @@
+
+/* ===========================
+   STORIES SECTION
+   =========================== */
+
+.stories-section {
+  --story-cream: #f8f2e8;
+  --story-paper: #fffdf8;
+  --story-ink: #292722;
+  --story-muted: #827c72;
+  --story-accent: #b49a78;
+  --story-green: #66836a;
+
+  overflow: hidden;
+  padding: clamp(4rem, 8vw, 7.5rem) 0;
+  color: var(--story-ink);
+  background: var(--story-cream);
+}
+
+.stories-heading {
+  width: min(1160px, calc(100% - 3rem));
+  margin: 0 auto 3rem;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.stories-eyebrow {
+  margin: 0 0 1rem;
+  color: var(--story-accent);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+}
+
+.stories-heading h2 {
+  margin: 0;
+  font-size: clamp(2.4rem, 5.5vw, 4.7rem);
+  line-height: 0.99;
+  letter-spacing: -0.065em;
+  font-weight: 750;
+}
+
+.stories-intro {
+  max-width: 490px;
+  margin: 1.25rem 0 0;
+  color: var(--story-muted);
+  font-size: 0.98rem;
+  line-height: 1.8;
+}
+
+.stories-all-link,
+.story-read-link {
+  color: var(--story-ink);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.stories-all-link {
+  flex-shrink: 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #c9bba7;
+}
+
+.stories-all-link span,
+.story-read-link span {
+  display: inline-block;
+  margin-left: 0.35rem;
+  transition: transform 180ms ease;
+}
+
+.stories-all-link:hover span,
+.story-read-link:hover span {
+  transform: translate(3px, -3px);
+}
+
+/* ===========================
+   AUTOMATIC CAROUSEL
+   =========================== */
+
+.stories-carousel {
+  position: relative;
+  overflow: hidden;
+  padding: 1.5rem 0 2rem;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.stories-carousel:active {
+  cursor: grabbing;
+}
+
+.stories-track {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.25rem;
+  width: max-content;
+  will-change: transform;
+}
+
+/* Every card has the same base width.
+   Transform scaling makes the center card larger without
+   changing the layout width used by the infinite loop. */
+
+.story-card {
+  position: relative;
+  flex: 0 0 265px;
+  width: 265px;
+  min-width: 0;
+  overflow: hidden;
+
+  border: 1px solid rgba(68, 55, 39, 0.08);
+  border-radius: 1.4rem;
+  background: var(--story-paper);
+  box-shadow: 0 10px 35px rgba(69, 51, 30, 0.06);
+
+  opacity: 0.72;
+  transform: scale(0.86);
+  transform-origin: center center;
+
+  transition:
+    transform 350ms ease,
+    opacity 350ms ease,
+    box-shadow 350ms ease;
+}
+
+/* Dynamically applied by JavaScript to the center card. */
+
+.story-card.is-centered {
+  z-index: 2;
+  opacity: 1;
+  transform: scale(1.06);
+  box-shadow: 0 18px 42px rgba(69, 51, 30, 0.14);
+}
+
+/* Side cards show a shorter description.
+   The center card shows the complete description. */
+
+.story-card:not(.is-centered) .story-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+}
+
+.story-card:not(.is-centered) .story-progress-labels,
+.story-card:not(.is-centered) .story-progress,
+.story-card:not(.is-centered) .story-card-footer {
+  opacity: 0.65;
+}
+
+/* ===========================
+   CARD IMAGE
+   =========================== */
+
+.story-image-link {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 1 / 0.88;
+  background: #e5d9c8;
+}
+
+.story-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 600ms ease;
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
+
+.story-card:hover .story-image {
+  transform: scale(1.055);
+}
+
+.story-image-label {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  padding: 0.5rem 0.7rem;
+
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+
+  color: white;
+  background: rgba(35, 31, 25, 0.45);
+
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  backdrop-filter: blur(8px);
+}
+
+/* ===========================
+   CARD CONTENT
+   =========================== */
+
+.story-content {
+  padding: 1.15rem 1.2rem 1.25rem;
+}
+
+.story-person {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.story-person h3 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 750;
+}
+
+.story-location {
+  margin: 0.3rem 0 0;
+  color: var(--story-muted);
+  font-size: 0.75rem;
+}
+
+.story-heart {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+
+  border: 1px solid #e8dfd1;
+  border-radius: 50%;
+
+  color: var(--story-ink);
+  background: transparent;
+  font: inherit;
+  font-size: 1.35rem;
+  cursor: pointer;
+
+  transition:
+    color 200ms ease,
+    background 200ms ease,
+    transform 200ms ease;
+}
+
+.story-heart:hover {
+  color: white;
+  background: var(--story-green);
+  transform: scale(1.08);
+}
+
+.story-heart:focus-visible,
+.stories-carousel:focus-visible,
+.stories-button:focus-visible {
+  outline: 3px solid var(--story-green);
+  outline-offset: 4px;
+}
+
+.story-content h4 {
+  margin: 1rem 0 0.45rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.story-description {
+  margin: 0 0 1.15rem;
+  color: var(--story-muted);
+  font-size: 0.78rem;
+  line-height: 1.65;
+}
+
+.story-progress-labels,
+.story-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.story-progress-labels {
+  margin-bottom: 0.55rem;
+}
+
+.story-progress-labels span:last-child {
+  color: var(--story-green);
+}
+
+.story-progress {
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #eae3d8;
+}
+
+.story-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--story-green);
+  animation: progress-grow 1.2s ease both;
+}
+
+.story-card-footer {
+  margin-top: 0.85rem;
+  color: var(--story-muted);
+  font-weight: 500;
+}
+
+.story-read-link {
+  flex-shrink: 0;
+  color: var(--story-ink);
+}
+
+/* ===========================
+   BOTTOM CALL TO ACTION
+   =========================== */
+
+.stories-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin: 1.5rem auto 0;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.stories-bottom p {
+  margin: 0;
+  color: var(--story-muted);
+  font-size: 0.9rem;
+}
+
+.stories-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.9rem 1.3rem;
+
+  border: 1px solid var(--story-ink);
+  border-radius: 999px;
+
+  color: var(--story-paper);
+  background: var(--story-ink);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 700;
+
+  transition:
+    color 200ms ease,
+    background 200ms ease,
+    transform 200ms ease;
+}
+
+.stories-button:hover {
+  color: var(--story-ink);
+  background: transparent;
+  transform: translateY(-2px);
+}
+
+.stories-button span {
+  font-size: 1.1rem;
+}
+
+/* ===========================
+   ANIMATIONS
+   =========================== */
+
+@keyframes progress-grow {
+  from {
+    width: 0;
+  }
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+
+@media (max-width: 700px) {
+  .stories-section {
+    padding: 4rem 0;
+  }
+
+  .stories-heading {
+    align-items: start;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .stories-heading h2 {
+    font-size: clamp(2.35rem, 10vw, 3.4rem);
+  }
+
+  .stories-intro {
+    font-size: 0.9rem;
+  }
+
+  .stories-track {
+    gap: 0.85rem;
+  }
+
+  .story-card {
+    flex-basis: 245px;
+    width: 245px;
+  }
+
+  .story-card.is-centered {
+    transform: scale(1.03);
+  }
+
+  .stories-bottom {
+    flex-direction: column;
+  }
+}
+
+/* Respect visitors who prefer reduced motion. */
+
+@media (prefers-reduced-motion: reduce) {
+  .story-card,
+  .story-image,
+  .story-progress span,
+  .stories-button,
+  .story-heart {
+    animation: none;
+    transition: none;
+  }
+
+  .story-card,
+  .story-card.is-centered {
+    transform: none;
+  }
+
+  .stories-track {
+    will-change: auto;
+  }
+}
