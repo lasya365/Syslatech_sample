@@ -85,7 +85,7 @@ const impacts = [
     "(prefers-reduced-motion: reduce)"
   ).matches;
 
-  function animateCount(target, currencyPrefix) {
+  function animateCount(target: number, currencyPrefix: string) {
     cancelAnimationFrame(animationFrame);
 
     if (!number || !prefix) return;

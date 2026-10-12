@@ -1,0 +1,40 @@
+
+---
+export function getStaticPaths() {
+  return [
+    {
+      params: { name: 'voting-system' },
+      props: {
+        title: 'College Voting System',
+        technology: 'React and Express',
+      },
+    },
+    {
+      params: { name: 'ai-interview-assistant' },
+      props: {
+        title: 'AI Interview Assistant',
+        technology: 'Python and RAG',
+      },
+    },
+  ];
+}
+
+const projectName = Astro.params.name;
+const { title, technology } = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <title>{title}</title>
+  </head>
+
+  <body>
+    <h1>Project Details</h1>
+
+    <h2>{title}</h2>
+
+    <p>Project URL name: {projectName}</p>
+
+    <p>Technology: {technology}</p>
+  </body>
+</html>
