@@ -1,0 +1,252 @@
+---
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "../styles/AgentWorkflow.css";
+---
+
+<section class="agent-dashboard">
+  <div class="hud-frame"></div>
+
+  <div class="dashboard-grid">
+    <!-- KNOWLEDGE GRAPH -->
+    <section class="knowledge">
+      <header class="section-heading">
+        <span></span>
+        <div>
+          <h2>KNOWLEDGE GRAPH</h2>
+          <p>THE INPUT</p>
+        </div>
+        <span></span>
+      </header>
+
+      <!-- TECHNICAL -->
+      <div class="knowledge-card technical">
+        <h3>Technical</h3>
+        <div class="tool-grid">
+          <div class="tool">
+            <i class="fa-brands fa-github"></i>
+            <span>GitHub</span>
+          </div>
+          <div class="tool">
+            <i class="fa-solid fa-vial"></i>
+            <span>Selenium</span>
+          </div>
+          <div class="tool">
+            <i class="fa-brands fa-java"></i>
+            <span>Java</span>
+          </div>
+          <div class="tool">
+            <i class="fa-brands fa-python"></i>
+            <span>Python</span>
+          </div>
+          <div class="tool">
+            <i class="fa-brands fa-git-alt"></i>
+            <span>Git</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BUSINESS -->
+      <div class="knowledge-card business">
+        <h3>Business</h3>
+        <div class="tool-grid">
+          <div class="tool">
+            <i class="fa-brands fa-jira"></i>
+            <span>Jira</span>
+          </div>
+          <div class="tool">
+            <i class="fa-solid fa-book-open"></i>
+            <span>Confluence</span>
+          </div>
+          <div class="tool">
+            <i class="fa-brands fa-slack"></i>
+            <span>Slack</span>
+          </div>
+          <div class="tool">
+            <i class="fa-brands fa-microsoft"></i>
+            <span>Teams</span>
+          </div>
+          <div class="tool">
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Analytics</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HISTORIC -->
+      <div class="knowledge-card historic">
+        <h3>Historic</h3>
+        <div class="tool-grid">
+          <div class="tool">
+            <i class="fa-solid fa-list-check"></i>
+            <span>Test Runs</span>
+          </div>
+          <div class="tool">
+            <i class="fa-solid fa-bug"></i>
+            <span>Defect History</span>
+          </div>
+          <div class="tool">
+            <i class="fa-solid fa-chart-area"></i>
+            <span>Coverage Trends</span>
+          </div>
+          <div class="tool">
+            <i class="fa-solid fa-file-lines"></i>
+            <span>Execution Logs</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- APPLICATION -->
+      <div class="knowledge-card application">
+        <h3>Application</h3>
+        <div class="tool-grid">
+          <div class="tool">
+            <i class="fa-solid fa-globe"></i>
+            <span>Web</span>
+          </div>
+          <div class="tool">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+            <span>Mobile</span>
+          </div>
+          <div class="tool">
+            <i class="fa-solid fa-cloud"></i>
+            <span>API</span>
+          </div>
+          <div class="tool">
+            <i class="fa-solid fa-desktop"></i>
+            <span>Desktop</span>
+          </div>
+          <div class="tool">
+            <i class="fa-solid fa-gears"></i>
+            <span>Services</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CENTRAL AI AGENT -->
+    <section class="agent-area">
+      <div class="agent-wire left-wire wire-one">
+        <i></i><i></i><i></i>
+      </div>
+      <div class="agent-wire left-wire wire-two">
+        <i></i><i></i><i></i>
+      </div>
+      <div class="agent-wire left-wire wire-three">
+        <i></i><i></i><i></i>
+      </div>
+      <div class="agent-wire left-wire wire-four">
+        <i></i><i></i><i></i>
+      </div>
+
+      <div class="agent-art" id="agent-art">
+        <div class="planet">
+          <div class="planet-surface"></div>
+          <div class="visor">
+            <span></span>
+            <span></span>
+          </div>
+          <div class="planet-ring ring-back"></div>
+          <div class="planet-ring ring-front"></div>
+        </div>
+
+        <div class="hologram">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="agent-info">
+        <p class="agent-index">
+          AUTONOMOUS AGENT
+          <span id="agent-number">01</span>
+        </p>
+
+        <h1 id="agent-name">RUNNER</h1>
+
+        <p id="agent-description">
+          Executes the suite autonomously<br />
+          across web, mobile, and API.
+        </p>
+
+        <div class="crew-label">
+          <span></span>
+          <p>24/7 · MORE IN THE CREW</p>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="agent-wire right-wire wire-five">
+        <i></i><i></i><i></i>
+      </div>
+      <div class="agent-wire right-wire wire-six">
+        <i></i><i></i><i></i>
+      </div>
+    </section>
+
+    <!-- OUTCOMES -->
+    <section class="outcomes">
+      <header class="section-heading">
+        <span></span>
+        <div>
+          <h2>OUTCOMES</h2>
+          <p>THE IMPACT</p>
+        </div>
+        <span></span>
+      </header>
+
+      <div class="outcome-panel progress-panel">
+        <h3>Agentic progress</h3>
+
+        <div class="metric">
+          <div class="metric-icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <p><strong>23</strong> Gaps identified</p>
+        </div>
+
+        <div class="metric">
+          <div class="metric-icon">
+            <i class="fa-solid fa-file-circle-check"></i>
+          </div>
+          <p><strong>40</strong> Auto-generated test plans</p>
+        </div>
+
+        <div class="metric">
+          <div class="metric-icon">
+            <i class="fa-solid fa-play"></i>
+          </div>
+          <p><strong>38</strong> Autonomous executions</p>
+        </div>
+      </div>
+
+      <div class="outcome-panel release-panel">
+        <h3>Release signal</h3>
+
+        <div class="metric">
+          <div class="metric-icon">
+            <i class="fa-solid fa-chart-pie"></i>
+          </div>
+          <p><strong>74%</strong> Coverage</p>
+        </div>
+
+        <div class="metric">
+          <div class="metric-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <p><strong>87%</strong> Confidence Score</p>
+        </div>
+
+        <div class="metric warning">
+          <div class="metric-icon">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <p><strong>CONDITIONAL</strong> Release gate</p>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+<script>
+  import "../scripts/AgentWorkflow.js";
+</script>
