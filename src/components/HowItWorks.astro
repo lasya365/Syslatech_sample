@@ -1,0 +1,214 @@
+---
+import "../styles/workflow.css";
+---
+
+<section class="workflow" aria-labelledby="workflow-heading">
+  <!-- Reusable SVG icons -->
+  <svg
+    class="svg-definitions"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <!-- Commit: code change -->
+    <symbol id="workflow-commit" viewBox="0 0 32 32">
+      <path
+        d="M16 3 28 10v13L16 30 4 23V10L16 3Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.4"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M4 10l12 7 12-7M16 17v13"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.4"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M12 6.5 16 4l4 2.5-4 2.5-4-2.5Z"
+        fill="currentColor"
+      />
+      <circle cx="12" cy="6.5" r="2.5" fill="#f8f9fb" />
+    </symbol>
+
+    <!-- Analyze: AI intelligence -->
+    <symbol id="workflow-analyze" viewBox="0 0 32 32">
+      <path
+        d="M16 2 19.7 11.8 30 16l-10.3 4.2L16 30l-4.2-9.8L2 16l9.8-4.2L16 2Z"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linejoin="round"
+      />
+      <path
+        d="m26 2 .9 3.1L30 6l-3.1.9L26 10l-.9-3.1L22 6l3.1-.9L26 2Z"
+        fill="currentColor"
+      />
+    </symbol>
+
+    <!-- Test: terminal / computer -->
+    <symbol id="workflow-test" viewBox="0 0 32 32">
+      <rect
+        x="3"
+        y="5"
+        width="26"
+        height="19"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        rx="1"
+      />
+      <path
+        d="M7 10h18M7 14h5m-5 4h13M12 24v4m8-4v4M9 28h14"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+      />
+    </symbol>
+
+    <!-- Optimize: gears -->
+    <symbol id="workflow-optimize" viewBox="0 0 32 32">
+      <g
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path
+          d="M13 3h6l1.2 3.2 2.5 1.1 3-1 3 5.2-2.1 2.5v2.8l2.1 2.5-3 5.2-3-1-2.5 1.1L19 28h-6l-1.2-3.4-2.5-1.1-3 1-3-5.2 2.1-2.5V14l-2.1-2.5 3-5.2 3 1 2.5-1.1L13 3Z"
+          transform="translate(1 0) scale(.9)"
+        />
+        <circle cx="16" cy="15" r="3.5" />
+        <path d="M25 3v5m-2.5-2.5h5" />
+      </g>
+    </symbol>
+
+    <!-- Score: analytics -->
+    <symbol id="workflow-score" viewBox="0 0 32 32">
+      <g
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linejoin="round"
+      >
+        <path d="M3 28h27" />
+        <rect x="6" y="18" width="5" height="10" rx=".5" />
+        <rect x="14" y="12" width="5" height="16" rx=".5" />
+        <rect x="22" y="4" width="5" height="24" rx=".5" />
+      </g>
+    </symbol>
+
+    <!-- Release: rocket -->
+    <symbol id="workflow-release" viewBox="0 0 32 32">
+      <g
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M16 3c-5 5-7 11-6 18l6-3 6 3c1-7-1-13-6-18Z" />
+        <circle cx="16" cy="11" r="2.2" />
+        <path d="m10 17-4 5 5-1m11-4 4 5-5-1M13 25l3 4 3-4" />
+      </g>
+    </symbol>
+  </svg>
+
+  <div class="workflow-inner">
+    <span class="workflow-eyebrow">HOW IT WORKS</span>
+
+    <h2 id="workflow-heading">
+      From commit to confident releases,<br class="desktop-break" />
+      automatically.
+    </h2>
+
+    <p class="workflow-description">
+      At every commit, agents map the change, find what's to be tested,
+      generate and run the tests to close it, and score your release
+      confidence. You approve what ships.
+    </p>
+
+    <div class="workflow-buttons" role="group" aria-label="Workflow stages">
+      {
+        [
+          {
+            name: "Commit",
+            description: "A new commit starts the workflow.",
+            icon: "commit",
+          },
+          {
+            name: "Analyze",
+            description:
+              "Agents map code changes and identify what may be affected.",
+            icon: "analyze",
+          },
+          {
+            name: "Generate",
+            description:
+              "AI agents generate relevant tests for the changes.",
+            icon: "test",
+          },
+          {
+            name: "Optimize",
+            description:
+              "The workflow improves test coverage and identifies issues.",
+            icon: "optimize",
+          },
+          {
+            name: "Score",
+            description:
+              "Review test results and assess release confidence.",
+            icon: "score",
+          },
+          {
+            name: "Release",
+            description:
+              "Approve the changes you are ready to ship.",
+            icon: "release",
+          },
+        ].map((step, index) => (
+          <button
+            type="button"
+            class:list={[
+              "workflow-button",
+              { active: index === 0 },
+            ]}
+            data-name={step.name}
+            data-description={step.description}
+            aria-label={step.name}
+            aria-pressed={index === 0 ? "true" : "false"}
+          >
+            <svg
+              class="workflow-icon"
+              viewBox="0 0 32 32"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <use href={`#workflow-${step.icon}`} />
+            </svg>
+
+            <span class="workflow-button-label">
+              {step.name}
+            </span>
+          </button>
+        ))
+      }
+    </div>
+
+    <!-- Announces the selected step to assistive technology -->
+    <p
+      class="workflow-step-description"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      A new commit starts the workflow.
+    </p>
+  </div>
+</section>
+
+<script>
+  import "../scripts/workflow.ts";
+</script>
