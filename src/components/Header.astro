@@ -1,4 +1,3 @@
-
 ---
 const solutions = [
   {
@@ -117,7 +116,7 @@ const partners = [
   {
     title: "Customised Solutions",
     description:
-      "Tailored testing for unique business needs. Flexible automation frameworks and workflows. Scalable quality solutions for every project.",
+      "Tailored testing for unique business needs. Flexible automation frameworks and workflows. Scalable quality solutions for every business.",
     icon: "Customised Solutions",
     href: "",
   },
@@ -136,37 +135,43 @@ const partners = [
 const tools = [
   {
     title: "Testsigma",
-    description: "Low-code automation powered by AI. Faster test creation with minimal scripting.",
+    description:
+      "Low-code automation powered by AI. Faster test creation with minimal scripting.",
     image: "Testsigma.png",
     href: "",
   },
   {
     title: "Selenium",
-    description: "Scalable open-source web automation framework. Ideal for complex and enterprise applications.",
+    description:
+      "Scalable open-source web automation framework. Ideal for complex and enterprise applications.",
     image: "Selenium.png",
     href: "",
   },
   {
     title: "Playwright",
-    description: "Fast and reliable end-to-end testing. Built for modern JavaScript applications.",
+    description:
+      "Fast and reliable end-to-end testing. Built for modern JavaScript applications.",
     image: "Playwrite.png",
     href: "",
   },
   {
     title: "Katalon Studio",
-    description: "Unified testing for web, mobile, API and desktop. Quick setup with built-in integrations.",
+    description:
+      "Unified testing for web, mobile, API and desktop. Quick setup with built-in integrations.",
     image: "Katalon Studio.png",
     href: "",
   },
   {
     title: "Tricentis Tosca",
-    description: "Enterprise-grade model-based automation tool. Designed for complex business systems.",
+    description:
+      "Enterprise-grade model-based automation tool. Designed for complex business systems.",
     image: "Tricentis Tosca.png",
     href: "",
   },
   {
     title: "Cypress",
-    description: "Fast and developer-friendly testing framework. Perfect for modern front-end applications.",
+    description:
+      "Fast and developer-friendly testing framework. Perfect for modern front-end applications.",
     image: "Cypress.png",
     href: "",
   },
@@ -190,8 +195,8 @@ const menus = [
         class="slide-logo"
         src="https://syslatech.com/Images/Logo.png"
         alt="SYSLATECH"
-        />
-        <span class="brand-line"></span>
+      />
+      <span class="brand-line"></span>
     </a>
 
     <button
@@ -199,13 +204,18 @@ const menus = [
       type="button"
       aria-label="Toggle navigation"
       aria-expanded="false"
+      aria-controls="main-navigation"
     >
       <span></span>
       <span></span>
       <span></span>
     </button>
 
-    <nav class="main-nav" aria-label="Main navigation">
+    <nav
+      id="main-navigation"
+      class="main-nav"
+      aria-label="Main navigation"
+    >
       {menus.map((menu) => (
         <div class="nav-item" data-menu={menu.key}>
           <button
@@ -222,33 +232,48 @@ const menus = [
               fill="none"
               aria-hidden="true"
             >
-              <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <path
+                d="m6 9 6 6 6-6"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
             </svg>
           </button>
 
           <div class={`mega-menu mega-menu-${menu.key}`}>
             <div class="mega-menu-heading">
               <span>{menu.label}</span>
-              <span class="menu-subtitle">Explore our {menu.label.toLowerCase()}</span>
+              <span class="menu-subtitle">
+                Explore our {menu.label.toLowerCase()}
+              </span>
             </div>
 
             <div class="mega-grid">
               {menu.items.map((item) => (
-                <a class="mega-card" href={item.href} target="_blank" rel="noopener noreferrer">
-                  
+                <a
+                  class="mega-card"
+                  href={item.href || "#"}
+                  target={item.href ? "_blank" : undefined}
+                  rel={item.href ? "noopener noreferrer" : undefined}
+                  aria-label={`${item.title}: ${item.description}`}
+                >
                   <div class="card-icon">
                     {menu.key === "tools" ? (
-                    <img src={item.imageUrl} alt="" loading="lazy" />
+                      <img src={item.imageUrl} alt="" loading="lazy" />
                     ) : menu.key === "solutions" ? (
-                    <img src={item.icon} alt="" loading="lazy" />
+                      <img src={item.icon} alt="" loading="lazy" />
                     ) : (
-                    <img src={item.image} alt="" loading="lazy" />
+                      <img src={item.image} alt="" loading="lazy" />
                     )}
                   </div>
+
                   <div class="card-content">
                     <h3>{item.title}</h3>
                     <p>{item.description}</p>
                   </div>
+
                   <span class="card-arrow" aria-hidden="true">↗</span>
                 </a>
               ))}
@@ -260,6 +285,15 @@ const menus = [
       <a class="nav-link contact-link" href="/contact/">
         Contact
       </a>
+
+      <div class="theme-control">
+        <label class="sr-only" for="theme-select">Appearance</label>
+        <select id="theme-select" aria-label="Choose appearance">
+          <option value="auto">Auto</option>
+          <option value="light">Light</option>
+          <option value="dark">Dark</option>
+        </select>
+      </div>
     </nav>
   </div>
 </header>
@@ -269,17 +303,20 @@ const menus = [
     box-sizing: border-box;
   }
 
-  
   .site-header {
     position: sticky;
     top: 0;
     z-index: 1000;
     width: 100%;
-    background: #ffffff;
-    border-bottom: 1px solid #e7ebf2;
+    background: var(--header-bg);
+    color: var(--text-color);
+    border-bottom: 1px solid var(--border-color);
     font-family: Arial, Helvetica, sans-serif;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
   }
-
 
   .header-inner {
     width: min(1440px, 100%);
@@ -292,7 +329,6 @@ const menus = [
     gap: 34px;
   }
 
-  
   .brand {
     display: flex;
     flex-direction: column;
@@ -320,7 +356,6 @@ const menus = [
     background: #1684e8;
   }
 
-
   .main-nav {
     display: flex;
     align-items: center;
@@ -342,21 +377,31 @@ const menus = [
     border: 0;
     border-radius: 6px;
     background: transparent;
-    color: #17243a;
+    color: var(--text-color);
     font: inherit;
     font-size: 14px;
     font-weight: 600;
     text-decoration: none;
     white-space: nowrap;
     cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
   }
 
   .nav-link:hover,
   .nav-item.open > .nav-link,
   .nav-item:focus-within > .nav-link {
-    color: #0878d1;
-    background: #f0f7ff;
+    color: var(--hover-text-color);
+    background: var(--hover-bg);
+  }
+
+  .nav-link:focus-visible,
+  .dropdown-trigger:focus-visible,
+  .theme-control select:focus-visible,
+  .mobile-toggle:focus-visible {
+    outline: 2px solid var(--hover-border-color);
+    outline-offset: 3px;
   }
 
   .chevron {
@@ -370,7 +415,8 @@ const menus = [
     transform: rotate(180deg);
   }
 
-  /* Large dropdown panel */
+  /* Desktop dropdown panel */
+
   .mega-menu {
     position: absolute;
     top: 100%;
@@ -378,10 +424,11 @@ const menus = [
     right: 0;
     width: 100%;
     padding: 27px max(5%, calc((100% - 1300px) / 2)) 32px;
-    background: #ffffff;
-    border-top: 1px solid #edf0f5;
-    border-bottom: 1px solid #dce5ef;
-    box-shadow: 0 18px 35px rgba(18, 44, 78, 0.13);
+    background: var(--header-bg);
+    color: var(--text-color);
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 18px 35px var(--shadow-color);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
@@ -406,13 +453,13 @@ const menus = [
     align-items: baseline;
     gap: 15px;
     margin: 0 0 19px;
-    color: #153c70;
+    color: var(--heading-color);
     font-size: 20px;
     font-weight: 700;
   }
 
   .menu-subtitle {
-    color: #7a8798;
+    color: var(--subtitle-color);
     font-size: 12px;
     font-weight: 400;
   }
@@ -423,6 +470,8 @@ const menus = [
     gap: 13px;
   }
 
+  /* Theme-aware cards */
+
   .mega-card {
     position: relative;
     display: flex;
@@ -431,23 +480,23 @@ const menus = [
     min-width: 0;
     min-height: 112px;
     padding: 17px 32px 17px 16px;
-    border: 1px solid #e4eaf2;
+    border: 1px solid var(--border-color);
     border-radius: 10px;
-    background: #ffffff;
-    color: #24334a;
+    background: var(--card-color);
+    color: var(--text-color);
     text-decoration: none;
     transition:
       border-color 0.2s ease,
-      background 0.2s ease,
+      background-color 0.2s ease,
       box-shadow 0.2s ease,
       transform 0.2s ease;
   }
 
   .mega-card:hover,
   .mega-card:focus-visible {
-    border-color: #7dbcf5;
-    background: #f8fbff;
-    box-shadow: 0 8px 20px rgba(22, 100, 180, 0.1);
+    border-color: var(--hover-border-color);
+    background: var(--hover-bg);
+    box-shadow: 0 8px 20px var(--shadow-color);
     transform: translateY(-3px);
     outline: none;
   }
@@ -461,7 +510,7 @@ const menus = [
     height: 43px;
     overflow: hidden;
     border-radius: 9px;
-    background: #edf6ff;
+    background: var(--card-icon-bg);
   }
 
   .card-icon img {
@@ -478,20 +527,21 @@ const menus = [
 
   .card-content h3 {
     margin: 1px 0 7px;
-    color: #183a68;
+    color: var(--heading-color);
     font-size: 14px;
     font-weight: 700;
     line-height: 1.4;
     transition: color 0.2s ease;
   }
 
-  .mega-card:hover h3 {
-    color: #0878d1;
+  .mega-card:hover h3,
+  .mega-card:focus-visible h3 {
+    color: var(--hover-text-color);
   }
 
   .card-content p {
     margin: 0;
-    color: #69778b;
+    color: var(--subtitle-color);
     font-size: 12px;
     line-height: 1.65;
   }
@@ -500,24 +550,30 @@ const menus = [
     position: absolute;
     top: 13px;
     right: 13px;
-    color: #94a6bb;
+    color: var(--arrow-color);
     font-size: 15px;
-    transition: color 0.2s ease, transform 0.2s ease;
+    transition:
+      color 0.2s ease,
+      transform 0.2s ease;
   }
 
-  .mega-card:hover .card-arrow {
-    color: #0878d1;
+  .mega-card:hover .card-arrow,
+  .mega-card:focus-visible .card-arrow {
+    color: var(--hover-text-color);
     transform: translate(2px, -2px);
   }
+
+  /* Mobile navigation button */
 
   .mobile-toggle {
     display: none;
     width: 43px;
     height: 43px;
     padding: 10px;
-    border: 1px solid #e0e7f0;
+    border: 1px solid var(--border-color);
     border-radius: 7px;
-    background: #ffffff;
+    background: var(--header-bg);
+    color: var(--text-color);
     cursor: pointer;
   }
 
@@ -527,10 +583,51 @@ const menus = [
     height: 2px;
     margin: 4px 0;
     border-radius: 2px;
-    background: #153c70;
+    background: var(--text-color);
+  }
+
+  /* Screen-reader-only label */
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  /* Theme selector */
+
+  .theme-control {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+
+  .theme-control select {
+    max-width: 100%;
+    padding: 9px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--header-bg);
+    color: var(--text-color);
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+  }
+
+  .theme-control select option {
+    background: var(--header-bg);
+    color: var(--text-color);
   }
 
   /* Tablet */
+
   @media (max-width: 1100px) {
     .header-inner {
       gap: 15px;
@@ -538,7 +635,11 @@ const menus = [
     }
 
     .brand {
-      font-size: 22px;
+      width: 160px;
+    }
+
+    .slide-logo {
+      width: 155px;
     }
 
     .main-nav {
@@ -560,9 +661,14 @@ const menus = [
       gap: 10px;
       padding: 13px 27px 13px 12px;
     }
+
+    .theme-control {
+      margin-left: 4px;
+    }
   }
 
   /* Mobile navigation */
+
   @media (max-width: 760px) {
     .header-inner {
       position: relative;
@@ -573,7 +679,11 @@ const menus = [
     }
 
     .brand {
-      font-size: 23px;
+      width: 160px;
+    }
+
+    .slide-logo {
+      width: 155px;
     }
 
     .mobile-toggle {
@@ -620,9 +730,10 @@ const menus = [
       max-height: 55vh;
       overflow-y: auto;
       padding: 12px 0 15px;
-      border: 0;
+      border: 1px solid var(--border-color);
       border-radius: 8px;
-      background: #f7faff;
+      background: var(--header-bg);
+      color: var(--text-color);
       box-shadow: none;
       opacity: 1;
       visibility: visible;
@@ -661,7 +772,7 @@ const menus = [
     .mega-card {
       min-height: 90px;
       padding: 13px 30px 13px 12px;
-      background: #ffffff;
+      background: var(--card-color);
     }
 
     .card-icon {
@@ -682,9 +793,22 @@ const menus = [
     .card-content p {
       font-size: 12px;
     }
+
+    .theme-control {
+      width: 100%;
+      margin: 8px 0 0;
+    }
+
+    .theme-control select {
+      width: 100%;
+      min-height: 42px;
+    }
   }
 
+  /* Reduced motion */
+
   @media (prefers-reduced-motion: reduce) {
+    .site-header,
     .nav-link,
     .chevron,
     .mega-menu,
@@ -697,14 +821,31 @@ const menus = [
 </style>
 
 <script>
+  import "../scripts/theme.ts";
+
   const header = document.querySelector(".site-header");
   const mobileToggle = header?.querySelector(".mobile-toggle");
   const mainNav = header?.querySelector(".main-nav");
   const navItems = header?.querySelectorAll(".nav-item");
 
+  function closeDropdowns() {
+    navItems?.forEach((item) => {
+      item.classList.remove("open");
+
+      item
+        .querySelector(".dropdown-trigger")
+        ?.setAttribute("aria-expanded", "false");
+    });
+  }
+
   mobileToggle?.addEventListener("click", () => {
     const isOpen = mainNav?.classList.toggle("mobile-open") ?? false;
+
     mobileToggle.setAttribute("aria-expanded", String(isOpen));
+
+    if (!isOpen) {
+      closeDropdowns();
+    }
   });
 
   navItems?.forEach((item) => {
@@ -715,12 +856,7 @@ const menus = [
 
       const wasOpen = item.classList.contains("open");
 
-      navItems.forEach((otherItem) => {
-        otherItem.classList.remove("open");
-        otherItem
-          .querySelector(".dropdown-trigger")
-          ?.setAttribute("aria-expanded", "false");
-      });
+      closeDropdowns();
 
       if (!wasOpen) {
         item.classList.add("open");
@@ -730,24 +866,17 @@ const menus = [
   });
 
   document.addEventListener("click", (event) => {
-    if (event.target instanceof Node && !header?.contains(event.target)) {
-      navItems?.forEach((item) => {
-        item.classList.remove("open");
-        item
-          .querySelector(".dropdown-trigger")
-          ?.setAttribute("aria-expanded", "false");
-      });
+    if (
+      event.target instanceof Node &&
+      !header?.contains(event.target)
+    ) {
+      closeDropdowns();
     }
   });
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
-      navItems?.forEach((item) => {
-        item.classList.remove("open");
-        item
-          .querySelector(".dropdown-trigger")
-          ?.setAttribute("aria-expanded", "false");
-      });
+      closeDropdowns();
 
       mainNav?.classList.remove("mobile-open");
       mobileToggle?.setAttribute("aria-expanded", "false");

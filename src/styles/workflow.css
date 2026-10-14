@@ -1,11 +1,17 @@
 /* =========================================
    Workflow section
+   Intentionally dark in Light, Dark and Auto
 ========================================= */
 
 .workflow {
   --workflow-accent: #00e6c3;
   --workflow-bg: #090a0d;
+  --workflow-card-bg: #111216;
+  --workflow-card-border: #27292f;
+  --workflow-text: #f8f9fb;
   --workflow-muted: #d1d3d9;
+  --workflow-label-bg: #ffffff;
+  --workflow-label-text: #191a1f;
 
   position: relative;
   isolation: isolate;
@@ -13,7 +19,7 @@
 
   padding: 8px 24px 32px;
 
-  color: #f8f9fb;
+  color: var(--workflow-text);
   text-align: center;
 
   background:
@@ -25,6 +31,15 @@
     var(--workflow-bg);
 
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Keep the workflow section dark regardless of global theme.
+   These variables are scoped to .workflow only. */
+
+html[data-theme="light"] .workflow,
+html[data-theme="dark"] .workflow,
+html:not([data-theme]) .workflow {
+  color-scheme: dark;
 }
 
 /* Hide the reusable SVG definitions */
@@ -78,7 +93,7 @@
   max-width: 1000px;
   margin: 5px auto 12px;
 
-  color: #f8f9fb;
+  color: var(--workflow-text);
 
   font-size: clamp(32px, 4.7vw, 49px);
   font-weight: 750;
@@ -135,9 +150,9 @@
   padding: 0;
 
   color: var(--workflow-accent);
-  background: #111216;
+  background: var(--workflow-card-bg);
 
-  border: 1px solid #27292f;
+  border: 1px solid var(--workflow-card-border);
   border-radius: 15px;
 
   cursor: pointer;
@@ -219,7 +234,7 @@
 }
 
 /* =========================================
-   White label beneath the selected icon
+   Label beneath the selected icon
 ========================================= */
 
 .workflow-button-label {
@@ -234,8 +249,8 @@
 
   padding: 9px 17px;
 
-  color: #191a1f;
-  background: #fff;
+  color: var(--workflow-label-text);
+  background: var(--workflow-label-bg);
 
   border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: 11px;

@@ -1,0 +1,237 @@
+
+/* =========================================
+   1. LIGHT THEME (DEFAULT)
+   ========================================= */
+
+:root,
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  /* Global page colors */
+  --bg-color: #ffffff;
+  --text-color: #222222;
+  --card-color: #f5f5f5;
+  --border-color: #dddddd;
+
+  /* Header and navigation */
+  --header-bg: #ffffff;
+  --heading-color: #183a68;
+  --subtitle-color: #69778b;
+  --muted-text: #69778b;
+
+  /* Hover and interactive elements */
+  --hover-bg: #f0f7ff;
+  --hover-border-color: #7dbcf5;
+  --hover-text-color: #1684e8;
+
+  /* Icons and navigation arrows */
+  --card-icon-bg: #f0f7ff;
+  --arrow-color: #94a6bb;
+
+  /* Shadows */
+  --shadow-color: rgba(18, 44, 78, 0.10);
+}
+
+
+/* =========================================
+   2. DARK THEME
+   ========================================= */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Global page colors */
+  --bg-color: #121212;
+  --text-color: #f5f5f5;
+  --card-color: #1e1e1e;
+  --border-color: #444444;
+
+  /* Header and navigation */
+  --header-bg: #181818;
+  --heading-color: #f0f4fa;
+  --subtitle-color: #c0cad8;
+  --muted-text: #c0cad8;
+
+  /* Hover and interactive elements */
+  --hover-bg: #252f3d;
+  --hover-border-color: #4a9ce8;
+  --hover-text-color: #7dbcf5;
+
+  /* Icons and navigation arrows */
+  --card-icon-bg: #252f3d;
+  --arrow-color: #c0cad8;
+
+  /* Shadows */
+  --shadow-color: rgba(0, 0, 0, 0.30);
+}
+
+
+/* =========================================
+   3. GLOBAL PAGE STYLES
+   ========================================= */
+
+html {
+  color-scheme: light;
+  background-color: var(--bg-color);
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+
+/* =========================================
+   4. DEFAULT THEME-AWARE ELEMENTS
+   ========================================= */
+
+/*
+  These are general-purpose styles.
+  Use these classes only for elements that
+  should respond to the selected theme.
+*/
+
+.card {
+  background-color: var(--card-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.theme-aware {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.theme-aware-card {
+  background-color: var(--card-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+
+/* =========================================
+   5. INTENTIONALLY LIGHT OR DARK SECTIONS
+   ========================================= */
+
+/*
+  Apply these classes only when a section
+  is deliberately designed to retain its
+  original appearance in both themes.
+*/
+
+/* Intentionally dark section */
+.section--dark {
+  background-color: #183a68;
+  color: #ffffff;
+}
+
+.section--dark h1,
+.section--dark h2,
+.section--dark h3,
+.section--dark h4,
+.section--dark p,
+.section--dark li {
+  color: inherit;
+}
+
+/* Intentionally light section */
+.section--light {
+  background-color: #ffffff;
+  color: #222222;
+}
+
+.section--light h1,
+.section--light h2,
+.section--light h3,
+.section--light h4,
+.section--light p,
+.section--light li {
+  color: inherit;
+}
+
+
+/* =========================================
+   6. ACCESSIBLE FORM CONTROLS
+   ========================================= */
+
+/*
+  Browser-native controls such as select,
+  input and textarea can follow the selected
+  light/dark color scheme.
+*/
+
+input,
+select,
+textarea,
+button {
+  color-scheme: inherit;
+}
+
+:root[data-theme="light"] input,
+:root[data-theme="light"] select,
+:root[data-theme="light"] textarea {
+  color: #222222;
+}
+
+:root[data-theme="dark"] input,
+:root[data-theme="dark"] select,
+:root[data-theme="dark"] textarea {
+  color: #f5f5f5;
+}
+
+
+/* =========================================
+   7. AUTO THEME
+   Follow the operating system preference
+   when data-theme is not set.
+   ========================================= */
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+
+    /* Global page colors */
+    --bg-color: #121212;
+    --text-color: #f5f5f5;
+    --card-color: #1e1e1e;
+    --border-color: #444444;
+
+    /* Header and navigation */
+    --header-bg: #181818;
+    --heading-color: #f0f4fa;
+    --subtitle-color: #c0cad8;
+    --muted-text: #c0cad8;
+
+    /* Hover and interactive elements */
+    --hover-bg: #252f3d;
+    --hover-border-color: #4a9ce8;
+    --hover-text-color: #7dbcf5;
+
+    /* Icons and navigation arrows */
+    --card-icon-bg: #252f3d;
+    --arrow-color: #c0cad8;
+
+    /* Shadows */
+    --shadow-color: rgba(0, 0, 0, 0.30);
+  }
+}
+
+
+/* =========================================
+   8. REDUCED MOTION ACCESSIBILITY
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  body {
+    transition: none;
+  }
+}
