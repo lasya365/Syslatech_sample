@@ -1,0 +1,40 @@
+
+---
+export const prerender = false;
+
+if (Astro.cache.enabled) {
+  Astro.cache.set({
+    maxAge: 60,
+    swr: 30,
+    tags: ['cache-demo'],
+  });
+}
+
+const generatedAt = new Date().toLocaleTimeString();
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Astro Route Caching Demo</title>
+  </head>
+
+  <body>
+    <main>
+      <h1>Astro Route Caching Demo</h1>
+
+      <p>
+        Time generated:
+        <strong>{generatedAt}</strong>
+      </p>
+
+      <p>
+        Cache enabled:
+        <strong>{String(Astro.cache.enabled)}</strong>
+      </p>
+
+      <button onclick="location.reload()">Refresh page</button>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,50 @@
+
+---
+export const prerender = false;
+
+if (Astro.cache.enabled) {
+  Astro.cache.set({
+    maxAge: 300,
+    swr: 60,
+    tags: ['blog-demo'],
+  });
+}
+
+const generatedAt = new Date().toLocaleTimeString();
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Benefits of Machine Learning</title>
+  </head>
+
+  <body>
+    <main>
+      <h1>Benefits of Machine Learning</h1>
+
+      <p>
+        Machine learning helps computers learn patterns from data
+        and make predictions.
+      </p>
+
+      <h2>Key Benefits</h2>
+      <ul>
+        <li>Automates repetitive tasks</li>
+        <li>Finds patterns in large datasets</li>
+        <li>Helps make data-driven decisions</li>
+      </ul>
+
+      <p>
+        Page generated at:
+        <strong>{generatedAt}</strong>
+      </p>
+
+      <p>
+        Cache enabled:
+        <strong>{String(Astro.cache.enabled)}</strong>
+      </p>
+    </main>
+  </body>
+</html>

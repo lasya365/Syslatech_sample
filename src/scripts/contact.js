@@ -16,6 +16,9 @@ if (form instanceof HTMLFormElement) {
   const successMessage = document.querySelector("#contact-success");
   const failureMessage = document.querySelector("#contact-failure");
 
+  let draftSaveTimer;
+  let draftSubmitted = false;
+
   const setError = (input, errorElement, message) => {
     input.setAttribute("aria-invalid", String(Boolean(message)));
     errorElement.textContent = message;
@@ -27,13 +30,16 @@ if (form instanceof HTMLFormElement) {
     failureMessage.textContent = "";
   };
 
+  // -----------------------------
+  // FORM VALIDATION
+  // -----------------------------
+
   const validateName = () => {
     const value = nameInput.value.trim();
 
     // Accept letters, spaces, apostrophes, and hyphens.
-    // Reject numbers and names made only of special characters.
     const validName =
-      /^[\p{L}\p{M}]+(?:[ '\u2019-][\p{L}\p{M}]+)*$/u.test(value);
+      /^\p{L}[\p{L}\p{M}]*(?:[ '\u2019-][\p{L}][\p{L}\p{M}]*)*$/u.test(value);
 
     let error = "";
 
@@ -84,6 +90,104 @@ if (form instanceof HTMLFormElement) {
     return !error;
   };
 
+  // -----------------------------
+  // SESSION DRAFT SAVING
+  // -----------------------------
+
+  const saveDraft = async () => {
+    if (draftSubmitted) return;
+
+    try {
+      const response = await fetch("/api/contact-draft", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: nameInput.value,
+          countryCode: countryCode.value,
+          phone: phoneInput.value,
+          email: emailInput.value,
+          message: messageInput.value,
+        }),
+      });
+
+      if (!response.ok) {
+        console.error("Unable to save the contact draft.");
+      }
+    } catch (error) {
+      console.error("Unable to save contact draft:", error);
+    }
+  };
+
+  const scheduleDraftSave = () => {
+    if (draftSubmitted) return;
+
+    clearTimeout(draftSaveTimer);
+    draftSaveTimer = setTimeout(saveDraft, 500);
+  };
+
+  // Save the draft whenever the visitor changes a field.
+  [
+    nameInput,
+    countryCode,
+    phoneInput,
+    emailInput,
+    messageInput,
+  ].forEach((field) => {
+    field.addEventListener("input", scheduleDraftSave);
+    field.addEventListener("change", scheduleDraftSave);
+  });
+
+  // -----------------------------
+  // RESTORE SESSION DRAFT
+  // -----------------------------
+
+  const restoreDraft = async () => {
+    try {
+      const response = await fetch("/api/contact-draft");
+      const result = await response.json();
+
+      if (!response.ok || !result.success || !result.draft) {
+        return;
+      }
+
+      const draft = result.draft;
+
+      nameInput.value = draft.name ?? "";
+      countryCode.value =
+        draft.countryCode ?? countryCode.value;
+      phoneInput.value = draft.phone ?? "";
+      emailInput.value = draft.email ?? "";
+      messageInput.value = draft.message ?? "";
+
+      // Update the message character counter.
+      messageCount.textContent = String(messageInput.value.length);
+    } catch (error) {
+      console.error("Unable to restore contact draft:", error);
+    }
+  };
+
+  // -----------------------------
+  // CLEAR SESSION DRAFT
+  // -----------------------------
+
+  const clearDraft = async () => {
+    clearTimeout(draftSaveTimer);
+
+    const response = await fetch("/api/contact-draft", {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      throw new Error("Unable to clear the saved draft.");
+    }
+  };
+
+  // -----------------------------
+  // EXISTING FIELD BEHAVIOUR
+  // -----------------------------
+
   nameInput.addEventListener("input", () => {
     validateName();
     clearMessages();
@@ -106,7 +210,11 @@ if (form instanceof HTMLFormElement) {
     clearMessages();
   });
 
-  form.addEventListener("submit", (event) => {
+  // -----------------------------
+  // CONTACT FORM SUBMISSION
+  // -----------------------------
+
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
     clearMessages();
 
@@ -115,7 +223,9 @@ if (form instanceof HTMLFormElement) {
     const emailIsValid = validateEmail();
 
     if (!nameIsValid || !phoneIsValid || !emailIsValid) {
-      const firstInvalid = form.querySelector('[aria-invalid="true"]');
+      const firstInvalid = form.querySelector(
+        '[aria-invalid="true"]'
+      );
 
       if (firstInvalid instanceof HTMLElement) {
         firstInvalid.focus();
@@ -124,18 +234,62 @@ if (form instanceof HTMLFormElement) {
       return;
     }
 
-    /*
-     * Front-end demonstration only:
-     * This does not send the form to your company.
-     * Connect a backend or form service before using it in production.
-     */
-    successMessage.textContent =
-      "Thank you for your interest! Your form is valid. Connect the form to our submission service so our team can receive your message and contact you.";
+    // Make sure the latest values are saved before submission.
+    clearTimeout(draftSaveTimer);
+    await saveDraft();
 
-    successMessage.hidden = false;
-    successMessage.scrollIntoView({
-      behavior: "smooth",
-      block: "nearest",
-    });
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: nameInput.value.trim(),
+          countryCode: countryCode.value,
+          phone: phoneInput.value.trim(),
+          email: emailInput.value.trim(),
+          message: messageInput.value.trim(),
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error(
+          result.message || "Unable to submit your inquiry."
+        );
+      }
+
+      // The inquiry was saved successfully.
+      draftSubmitted = true;
+
+      try {
+        await clearDraft();
+      } catch (error) {
+        // The inquiry is already saved, so don't report
+        // the contact submission itself as a failure.
+        console.error("Unable to clear contact draft:", error);
+      }
+
+      successMessage.textContent =
+        "Thank you for your interest! Your inquiry has been saved successfully.";
+
+      successMessage.hidden = false;
+      successMessage.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    } catch (error) {
+      failureMessage.textContent =
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again.";
+
+      failureMessage.hidden = false;
+    }
   });
+
+  // Restore the saved values when the page loads.
+  restoreDraft();
 }

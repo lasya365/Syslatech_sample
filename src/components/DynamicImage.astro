@@ -1,0 +1,52 @@
+
+---
+import images from "../data/images.json";
+
+const { category = "Web Testing" } = Astro.props;
+
+const selectedImage = images.find(
+  (item) => item.category === category
+);
+
+const image = selectedImage?.image ?? "/images/web-testing.svg";
+const alt = selectedImage?.alt ?? "Web testing illustration";
+---
+
+<img
+  src={image}
+  alt={alt}
+  class="dynamic-image"
+  data-fallback="/images/web-testing.svg"
+/>
+
+<script>
+  document.querySelectorAll<HTMLImageElement>(".dynamic-image").forEach((img) => {
+    const useFallback = () => {
+      const fallback = img.dataset.fallback;
+
+      if (!fallback || img.dataset.fallbackUsed === "true") {
+        return;
+      }
+
+      img.dataset.fallbackUsed = "true";
+      img.src = fallback;
+    };
+
+    img.addEventListener("error", useFallback);
+
+    // Handle images that failed before the listener was added
+    if (img.complete && img.naturalWidth === 0) {
+      useFallback();
+    }
+  });
+</script>
+
+<style>
+  .dynamic-image {
+    width: 100%;
+    max-width: 350px;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    border-radius: 16px;
+  }
+</style>

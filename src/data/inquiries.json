@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1792037655890,
+    "name": "Lasya",
+    "countryCode": "+91",
+    "phone": "1234567",
+    "email": "example@nbkrist.org",
+    "message": "",
+    "submittedAt": "2026-10-15T04:14:15.890Z"
+  },
+  {
+    "id": 1792038973579,
+    "name": "Lasya",
+    "countryCode": "+91",
+    "phone": "1234567",
+    "email": "example@gmail.com",
+    "message": "",
+    "submittedAt": "2026-10-15T04:36:13.579Z"
+  },
+  {
+    "id": 1792039241335,
+    "name": "Hello",
+    "countryCode": "+91",
+    "phone": "7654321",
+    "email": "hello@gmail.com",
+    "message": "",
+    "submittedAt": "2026-10-15T04:40:41.335Z"
+  }
+]

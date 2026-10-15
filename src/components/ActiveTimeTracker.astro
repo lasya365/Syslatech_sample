@@ -1,0 +1,111 @@
+---
+---
+
+<div class="active-time-tracker">
+  <span class="tracker-label">Time on this page</span>
+  <span id="current-time" class="tracker-time">00:00:00</span>
+
+  <span class="tracker-label">Previous visit</span>
+  <span id="previous-time" class="tracker-time">No previous visit yet</span>
+</div>
+
+<script>
+  let totalSeconds = 0;
+  let startedAt = Date.now();
+  let isTracking = true;
+
+  function formatTime(seconds) {
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+
+    return [hours, minutes, secs]
+      .map((value) => String(value).padStart(2, "0"))
+      .join(":");
+  }
+
+  function updateTimer() {
+    const elapsed = isTracking
+      ? totalSeconds + Math.floor((Date.now() - startedAt) / 1000)
+      : totalSeconds;
+
+    document.getElementById("current-time").textContent = formatTime(elapsed);
+  }
+
+  function pauseTimer() {
+    if (isTracking) {
+      totalSeconds += Math.floor((Date.now() - startedAt) / 1000);
+      isTracking = false;
+      localStorage.setItem("activePageTotalSeconds", String(totalSeconds));
+      updateTimer();
+    }
+  }
+
+  function resumeTimer() {
+    if (!isTracking) {
+      startedAt = Date.now();
+      isTracking = true;
+    }
+  }
+
+  function saveFinalTime() {
+    pauseTimer();
+
+    localStorage.setItem(
+      "activePageTotalSeconds",
+      String(totalSeconds)
+    );
+
+    const timeSpent = formatTime(totalSeconds);
+
+    alert("Time spent on this page: " + timeSpent);
+  }
+
+  function loadPreviousTime() {
+    const savedTime = localStorage.getItem("activePageTotalSeconds");
+    const previousDisplay = document.getElementById("previous-time");
+
+    if (savedTime !== null) {
+      previousDisplay.textContent = formatTime(Number(savedTime));
+    }
+  }
+
+  window.onblur = pauseTimer;
+  window.onfocus = resumeTimer;
+  window.onpagehide = saveFinalTime;
+  window.onload = loadPreviousTime;
+
+  setInterval(updateTimer, 1000);
+  loadPreviousTime();
+  updateTimer();
+</script>
+
+<style>
+  .active-time-tracker {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 14px 16px;
+    border: 1px solid #ded8ce;
+    border-radius: 12px;
+    background: #fcfaf5;
+    color: #292929;
+    box-shadow: 0 4px 14px rgb(0 0 0 / 10%);
+    font-family: Arial, sans-serif;
+  }
+
+  .tracker-label {
+    font-size: 12px;
+  }
+
+  .tracker-time {
+    margin-bottom: 6px;
+    font-size: 18px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+</style>

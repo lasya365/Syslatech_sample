@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+  <rect width="400" height="300" rx="16" fill="#064e3b"></rect>
+  <rect x="165" y="45" width="70" height="135" rx="12" fill="#d1fae5"></rect>
+  <rect x="173" y="57" width="54" height="105" rx="5" fill="#065f46"></rect>
+  <circle cx="200" cy="170" r="4" fill="#a7f3d0"></circle>
+  <text x="200" y="230" font-size="24" text-anchor="middle" fill="white" font-family="Arial">MOBILE TESTING</text>
+</svg>

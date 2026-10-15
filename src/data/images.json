@@ -1,0 +1,15 @@
+
+[
+  {
+    "id": 1,
+    "category": "Web Testing",
+    "image": "/images/does-not-exist.svg",
+    "alt": "Web testing illustration"
+  },
+  {
+    "id": 2,
+    "category": "Mobile Testing",
+    "image": "/images/mobile-testing.svg",
+    "alt": "Mobile testing illustration"
+  }
+]

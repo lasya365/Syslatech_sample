@@ -1,0 +1,372 @@
+
+---
+---
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTML Canvas Demo</title>
+  </head>
+
+  <body>
+    <main class="page">
+      <header class="intro">
+        <p class="eyebrow">LEARN BY EXPLORING</p>
+        <h1>What is Canvas?</h1>
+        <p>
+          Canvas lets JavaScript draw graphics and animate them
+          directly inside a webpage.
+        </p>
+      </header>
+
+      <section class="demo">
+        <div class="demo-heading">
+          <div>
+            <h2>Interactive Particle Network</h2>
+            <p>Move your mouse over the canvas!</p>
+          </div>
+          <span class="live">LIVE DEMO</span>
+        </div>
+
+        <!-- HTML creates the drawing surface -->
+        <canvas
+          id="canvas-demo"
+          aria-label="Animated particles connected by lines. Move your mouse to interact."
+        ></canvas>
+
+        <div class="legend">
+          <span><i class="dot"></i> Moving particles</span>
+          <span><i class="line"></i> Connections</span>
+          <span>JavaScript + Canvas</span>
+        </div>
+      </section>
+
+      <section class="explanation">
+        <h2>How does it work?</h2>
+
+        <div class="steps">
+          <article>
+            <span>01</span>
+            <h3>HTML</h3>
+            <p>Creates the canvas element where graphics will appear.</p>
+          </article>
+
+          <article>
+            <span>02</span>
+            <h3>JavaScript</h3>
+            <p>Draws particles and connects nearby particles with lines.</p>
+          </article>
+
+          <article>
+            <span>03</span>
+            <h3>Animation</h3>
+            <p>Updates particle positions continuously to create movement.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      // 1. Find the canvas and get its 2D drawing tools.
+      const canvas = document.querySelector("#canvas-demo");
+
+      if (canvas instanceof HTMLCanvasElement) {
+        const ctx = canvas.getContext("2d");
+
+        if (ctx) {
+          type Particle = {
+            x: number;
+            y: number;
+            vx: number;
+            vy: number;
+          };
+
+          const particles: Particle[] = [];
+          const mouse = { x: -1000, y: -1000 };
+
+          let width = 0;
+          let height = 0;
+
+          // 2. Resize the drawing surface to fit its container.
+          function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            const dpr = window.devicePixelRatio || 1;
+
+            width = rect.width;
+            height = rect.height;
+
+            canvas.width = Math.round(width * dpr);
+            canvas.height = Math.round(height * dpr);
+
+            ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+          }
+
+          // 3. Create particles at random positions.
+          function createParticles() {
+            particles.length = 0;
+
+            const count = Math.min(
+              90,
+              Math.max(25, Math.floor(width / 10))
+            );
+
+            for (let i = 0; i < count; i++) {
+              particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 1.2,
+                vy: (Math.random() - 0.5) * 1.2,
+              });
+            }
+          }
+
+          // 4. Draw and animate the particles.
+          function animate() {
+            // Clear the previous frame.
+            ctx!.clearRect(0, 0, width, height);
+
+            // Move each particle and bounce it off the edges.
+            for (const p of particles) {
+              p.x += p.vx;
+              p.y += p.vy;
+
+              if (p.x < 0 || p.x > width) p.vx *= -1;
+              if (p.y < 0 || p.y > height) p.vy *= -1;
+
+              // Make nearby particles respond to the mouse.
+              const dx = p.x - mouse.x;
+              const dy = p.y - mouse.y;
+              const distance = Math.hypot(dx, dy);
+
+              if (distance < 100 && distance > 0) {
+                p.x += (dx / distance) * 0.8;
+                p.y += (dy / distance) * 0.8;
+              }
+
+              // Draw each particle as a small circle.
+              ctx!.beginPath();
+              ctx!.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+              ctx!.fillStyle = "#70d6ff";
+              ctx!.fill();
+            }
+
+            // Connect particles that are close to each other.
+            for (let i = 0; i < particles.length; i++) {
+              for (let j = i + 1; j < particles.length; j++) {
+                const a = particles[i];
+                const b = particles[j];
+
+                const distance = Math.hypot(
+                  a.x - b.x,
+                  a.y - b.y
+                );
+
+                if (distance < 100) {
+                  ctx!.beginPath();
+                  ctx!.moveTo(a.x, a.y);
+                  ctx!.lineTo(b.x, b.y);
+
+                  ctx!.strokeStyle =
+                    `rgba(112, 214, 255, ${1 - distance / 100})`;
+
+                  ctx!.lineWidth = 0.7;
+                  ctx!.stroke();
+                }
+              }
+            }
+
+            // Request the next animation frame.
+            requestAnimationFrame(animate);
+          }
+
+          // 5. Track the mouse position relative to the canvas.
+          canvas.addEventListener("pointermove", (event) => {
+            const rect = canvas!.getBoundingClientRect();
+
+            mouse.x = event.clientX - rect.left;
+            mouse.y = event.clientY - rect.top;
+          });
+
+          canvas.addEventListener("pointerleave", () => {
+            mouse.x = -1000;
+            mouse.y = -1000;
+          });
+
+          // Start the demo.
+          resizeCanvas();
+          createParticles();
+          animate();
+
+          window.addEventListener("resize", () => {
+            resizeCanvas();
+            createParticles();
+          });
+        }
+      }
+    </script>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #edf5ff;
+        background: #080e1c;
+      }
+
+      .page {
+        width: min(100% - 36px, 1000px);
+        margin: 0 auto;
+        padding: 55px 0;
+      }
+
+      .intro {
+        margin-bottom: 32px;
+      }
+
+      .eyebrow {
+        color: #70d6ff;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 3px;
+      }
+
+      h1 {
+        margin: 12px 0;
+        font-size: clamp(34px, 6vw, 56px);
+      }
+
+      .intro > p:last-child,
+      .demo-heading p {
+        color: #aab8ce;
+        line-height: 1.7;
+      }
+
+      .demo,
+      .explanation {
+        padding: 24px;
+        border: 1px solid #263852;
+        border-radius: 18px;
+        background: #101a2c;
+      }
+
+      .demo-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      h2 {
+        margin-top: 0;
+      }
+
+      .demo-heading h2 {
+        margin-bottom: 6px;
+        font-size: 20px;
+      }
+
+      .demo-heading p {
+        margin: 0;
+        font-size: 14px;
+      }
+
+      .live {
+        flex-shrink: 0;
+        padding: 7px 10px;
+        border-radius: 20px;
+        color: #91f5d2;
+        background: #17352f;
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      canvas {
+        display: block;
+        width: 100%;
+        height: 350px;
+        border: 1px solid #263d5b;
+        border-radius: 12px;
+        background:
+          radial-gradient(circle at center, #14243e, #080f1d);
+      }
+
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 18px;
+        margin-top: 18px;
+        color: #b4c3d9;
+        font-size: 12px;
+      }
+
+      .dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        margin-right: 5px;
+        border-radius: 50%;
+        background: #70d6ff;
+      }
+
+      .line {
+        display: inline-block;
+        width: 16px;
+        height: 1px;
+        margin: 0 5px 4px 0;
+        background: #70d6ff;
+      }
+
+      .explanation {
+        margin-top: 24px;
+      }
+
+      .steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+      }
+
+      .steps article > span {
+        color: #70d6ff;
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .steps h3 {
+        margin-bottom: 8px;
+      }
+
+      .steps p {
+        color: #aab8ce;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      @media (max-width: 600px) {
+        .page {
+          padding: 30px 0;
+        }
+
+        .demo,
+        .explanation {
+          padding: 16px;
+        }
+
+        canvas {
+          height: 280px;
+        }
+
+        .steps {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+      }
+    </style>
+  </body>
+</html>
